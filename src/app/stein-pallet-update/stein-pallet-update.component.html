@@ -1,0 +1,40 @@
+<div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="40px" class="content">
+	
+  <div fxFlex="" fxFlexOffset="20px" fxFlexAlign="center">
+		<div class="example-form">
+			<mat-form-field class="example-full-width" >
+				<mat-label>Store No (Almacenar numero)</mat-label>
+				<input matInput placeholder="" value="" [(ngModel)]="storeNO">
+      </mat-form-field>
+
+				<mat-form-field class="example-full-width" >
+					<mat-label>How many cartons? (¿Cauntos cajas?)</mat-label>
+					<input matInput placeholder="" [(ngModel)]="cartonCount"/>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" >
+					<mat-label>Length</mat-label>
+					<input matInput placeholder="" [(ngModel)]="length"/>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" >
+					<mat-label>Width</mat-label>
+					<input matInput placeholder="" [(ngModel)]="width"/>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" >
+					<mat-label>Height</mat-label>
+					<input matInput placeholder="" [(ngModel)]="height"/>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" >
+					<mat-label>Weight</mat-label>
+					<input matInput placeholder="" [(ngModel)]="weight"/>
+      </mat-form-field>
+		</div>
+	</div>
+
+<div fxFlexAlign="center">
+	<button   style="width: 500px;" mat-raised-button color="primary" (click)="updateClick()">Update Pallet Info</button>
+</div>
+
+
+
+</div>
