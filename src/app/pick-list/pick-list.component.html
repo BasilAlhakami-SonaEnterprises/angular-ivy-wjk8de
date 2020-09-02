@@ -9,7 +9,8 @@
 				<h2>Next Day</h2>
 				<mat-grid-list cols="2" rowHeight="1:1">
 					<mat-grid-tile>
-						<button mat-fab color="warn">{{ ShipsTodayNextDay }}</button>
+         
+						<button mat-fab color="warn"><mat-spinner color="accent" *ngIf="ShipTodayNextDayLoading"  diameter="30" ></mat-spinner>{{ ShipsTodayNextDay }}</button>
 					</mat-grid-tile>
 					<mat-grid-tile>
 						<mat-icon>airplanemode_active</mat-icon>
@@ -29,7 +30,9 @@
 				<h2>2nd Day, Ground</h2>
 				<mat-grid-list cols="2" rowHeight="1:1">
 					<mat-grid-tile>
-						<button mat-fab color="warn">{{ShipsTodayOther}}</button>
+						<button mat-fab color="warn">
+              		<mat-spinner color="accent" *ngIf="ShipTodayOtherLoading"  diameter="30" ></mat-spinner>
+              {{ShipsTodayOther}}</button>
 					</mat-grid-tile>
 					<mat-grid-tile>
 						<mat-icon>local_shipping</mat-icon>
@@ -49,7 +52,9 @@
 				<h2>Next Day</h2>
 				<mat-grid-list cols="2" rowHeight="1:1">
 					<mat-grid-tile>
-						<button mat-fab color="primary">{{ShipsLaterNextDay}}</button>
+						<button mat-fab color="primary">
+              	<mat-spinner color="accent" *ngIf="ShipLaterNextDayLoading"  diameter="30" ></mat-spinner>
+              {{ShipsLaterNextDay}}</button>
 					</mat-grid-tile>
 					<mat-grid-tile>
 						<mat-icon>airplanemode_active</mat-icon>
@@ -69,7 +74,9 @@
 				<h2>2nd Day, Ground</h2>
 				<mat-grid-list cols="2" rowHeight="1:1">
 					<mat-grid-tile>
-						<button mat-fab color="primary">{{ShipsLaterOther}}</button>
+						<button mat-fab color="primary">
+              	<mat-spinner color="accent" *ngIf="ShipsLaterOtherLoading"  diameter="30" ></mat-spinner>
+              {{ShipsLaterOther}}</button>
 					</mat-grid-tile>
 					<mat-grid-tile>
 						<mat-icon>local_shipping</mat-icon>
