@@ -13,8 +13,6 @@ import { PickListItemComponent } from './pick-list-item/pick-list-item.component
 
 import { OrderService } from './services/order.service';
 import { PrintLabelComponent } from './print-label/print-label.component';
-import { SteinPalletUpdateComponent } from './stein-pallet-update/stein-pallet-update.component';
-import { SteinConfirmComponent } from './stein-confirm/stein-confirm.component';
 import { LicensePlateService } from './services/licenseplate.service';
 import { QualityControlComponent } from './quality-control/quality-control.component';
 
@@ -22,7 +20,7 @@ import { QualityControlComponent } from './quality-control/quality-control.compo
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
-  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, SteinPalletUpdateComponent, SteinConfirmComponent, QualityControlComponent ],
+  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent ],
   bootstrap:    [ AppComponent ],
   providers: [ OrderService, LicensePlateService]
 })
