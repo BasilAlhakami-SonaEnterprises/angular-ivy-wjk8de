@@ -16,12 +16,13 @@ import { PrintLabelComponent } from './print-label/print-label.component';
 import { SteinPalletUpdateComponent } from './stein-pallet-update/stein-pallet-update.component';
 import { SteinConfirmComponent } from './stein-confirm/stein-confirm.component';
 import { ToteService } from './services/tote.service';
+import { QualityControlComponent } from './quality-control/quality-control.component';
 
 
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
-  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, SteinPalletUpdateComponent, SteinConfirmComponent ],
+  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, SteinPalletUpdateComponent, SteinConfirmComponent, QualityControlComponent ],
   bootstrap:    [ AppComponent ],
   providers: [ OrderService, ToteService]
 })
