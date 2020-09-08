@@ -8,7 +8,9 @@ export class OrderService {
       "https://directfulfillmentapi20200813154717.azurewebsites.net/api/CountOfNextDayShipmentsShipsToday",
     ShipsTodayOther: "https://directfulfillmentapi20200813154717.azurewebsites.net/api/CountOfNotNextDayShipmentsShipsToday?",
     ShipsLaterNextDay: "https://directfulfillmentapi20200813154717.azurewebsites.net/api/CountOfNextDayShipmentsShipsAfterToday?",
-    ShipsLaterOther: "https://directfulfillmentapi20200813154717.azurewebsites.net/api/CountOfNotNextDayShipmentsShipsAfterToday?"
+    ShipsLaterOther: "https://directfulfillmentapi20200813154717.azurewebsites.net/api/CountOfNotNextDayShipmentsShipsAfterToday?",
+    ByTrackingNumber:
+    "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetOrderByTrackingNumber/"
   };
 
   constructor(private http: HttpClient) {}
@@ -27,6 +29,10 @@ export class OrderService {
 
   getShipsLaterOtherCount() {
     return this.http.get(this.urls.ShipsLaterOther);
+  }
+
+  getByTrackingNumber(trackingNo){
+    return this.http.get(this.urls.ByTrackingNumber+trackingNo);
   }
 }
 
