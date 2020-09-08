@@ -15,6 +15,7 @@ import { OrderService } from './services/order.service';
 import { PrintLabelComponent } from './print-label/print-label.component';
 import { SteinPalletUpdateComponent } from './stein-pallet-update/stein-pallet-update.component';
 import { SteinConfirmComponent } from './stein-confirm/stein-confirm.component';
+import { ToteService } from './services/tote.service';
 
 
 
@@ -22,6 +23,6 @@ import { SteinConfirmComponent } from './stein-confirm/stein-confirm.component';
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
   declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, SteinPalletUpdateComponent, SteinConfirmComponent ],
   bootstrap:    [ AppComponent ],
-  providers: [ OrderService]
+  providers: [ OrderService, ToteService]
 })
 export class AppModule { }
