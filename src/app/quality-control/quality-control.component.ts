@@ -9,12 +9,16 @@ export class QualityControlComponent implements OnInit {
   
   constructor(private licensePlateService:LicensePlateService) { }
    licensePlateId;
+   licensePlate;
   ngOnInit() {
   }
   createLicensePlate(){
     this.licensePlateService.createLicensePlate().subscribe(data=>{
       this.licensePlateId=data;
     })
+  }
+  getLicensePlate(){
+    this.licensePlateService
   }
 
 }

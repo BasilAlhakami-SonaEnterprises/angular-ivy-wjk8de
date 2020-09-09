@@ -18,11 +18,11 @@ export class LicensePlateService {
     return this.http.get(this.urls.CreateLicensePlate,{responseType: 'text'});
   }
 
-  getTote(licensePlateId){
+  getLicensePlate(licensePlateId){
     return this.http.get(this.urls.GetLicensePlate+licensePlateId);
   }
 
-  addOrderToTote(poNumber,licensePlateId){
+  addOrderToLicensePlate(poNumber,licensePlateId){
     this.request.PONumber=poNumber;
     this.request.LicensePlateId=licensePlateId;
     return this.http.post(this.urls.AddOrderToLicensePlate,this.request);
