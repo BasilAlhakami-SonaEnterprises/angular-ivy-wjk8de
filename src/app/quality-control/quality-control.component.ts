@@ -15,10 +15,14 @@ export class QualityControlComponent implements OnInit {
   createLicensePlate(){
     this.licensePlateService.createLicensePlate().subscribe(data=>{
       this.licensePlateId=data;
+      this.getLP();
     })
   }
-  getLicensePlate(){
-    this.licensePlateService.
+  getLP(){
+   this.licensePlateService.getLicensePlate(this.licensePlateId).subscribe(data=>{
+     console.log(data);
+     this.licensePlate=data;
+   })
   }
 
 }
