@@ -18,7 +18,7 @@ export class QualityControlComponent implements OnInit {
     })
   }
   getLicensePlate(){
-    this.licensePlateService
+    this.licensePlateService.
   }
 
 }
