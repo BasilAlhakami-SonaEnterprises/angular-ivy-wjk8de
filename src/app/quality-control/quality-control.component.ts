@@ -20,7 +20,6 @@ export class QualityControlComponent implements OnInit {
   }
   getLP(){
    this.licensePlateService.getLicensePlate(this.licensePlateId).subscribe(data=>{
-     console.log(data);
      this.licensePlate=data;
    })
   }
