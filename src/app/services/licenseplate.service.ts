@@ -15,7 +15,7 @@ export class LicensePlateService {
   constructor(private http: HttpClient) { }
   
   createLicensePlate(){
-    return this.http.get(this.urls.CreateLicensePlate);
+    return this.http.get(this.urls.CreateLicensePlate,{responseType: 'text'});
   }
 
   getTote(licensePlateId){

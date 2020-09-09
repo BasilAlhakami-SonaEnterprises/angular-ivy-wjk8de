@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {LicensePlateService} from "../services/licenseplate.service";
 @Component({
   selector: 'app-quality-control',
   templateUrl: './quality-control.component.html',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QualityControlComponent implements OnInit {
 
-  constructor() { }
+  constructor(private licensePlateService:LicensePlateService) { }
 
   ngOnInit() {
+  }
+  createLicensePlate(){
+    this.licensePlateService.createLicensePlate().subscribe(data=>{
+      console.log(data);
+    })
   }
 
 }
