@@ -9,9 +9,9 @@
 				<h3 matLine>Select Items To Pick</h3>
 			</a>
   
-			<a mat-list-item>
+			<a mat-list-item (click)="drawer.toggle()" routerLink="/quality-control">
 				<mat-icon matListIcon>qr_code_scanner</mat-icon>
-				<h3 matLine>Confrim Picks</h3>
+				<h3 matLine>Quality Control</h3>
 			</a>
   
 			<a mat-list-item (click)="drawer.toggle()">
