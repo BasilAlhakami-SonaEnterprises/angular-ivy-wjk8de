@@ -6,14 +6,14 @@ import {LicensePlateService} from "../services/licenseplate.service";
   styleUrls: ['./quality-control.component.css']
 })
 export class QualityControlComponent implements OnInit {
-
+  
   constructor(private licensePlateService:LicensePlateService) { }
-
+   licensePlateId;
   ngOnInit() {
   }
   createLicensePlate(){
     this.licensePlateService.createLicensePlate().subscribe(data=>{
-      console.log(data);
+      this.licensePlateId=data;
     })
   }
 
