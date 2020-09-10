@@ -22,7 +22,7 @@ export class LicensePlateService {
     return this.http.get(this.urls.GetLicensePlate+licensePlateId);
   }
 
-  addOrderToLicensePlate(poNumber,licensePlateId){
+  addOrderToLicensePlate(licensePlateId,poNumber){
     this.request.PONumber=poNumber;
     this.request.LicensePlateId=licensePlateId;
     return this.http.post(this.urls.AddOrderToLicensePlate,this.request);
