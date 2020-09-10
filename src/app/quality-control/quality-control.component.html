@@ -1,7 +1,7 @@
   <div *ngIf="licensePlate==null" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="40px" class="content">
   <div  fxFlex="" fxFlexOffset="20px" fxFlexAlign="center">
     <div fxFlexAlign="center">
-	<button style="width: 500px;" (click)="createLicensePlate()" mat-raised-button color="primary">Create New License Plate<mat-spinner color="accent" *ngIf="creatingLicensePlate"  diameter="30" ></mat-spinner></button>
+	<button style="width: 500px;" (click)="createLicensePlate()" mat-raised-button color="primary">Create New License Plate</button>
 </div>
   <br/>
   <br/>
@@ -21,7 +21,9 @@
 				<mat-label>Enter License Plate No</mat-label>
 				<input matInput placeholder="" value="" [(ngModel)]="licensePlateId">
       </mat-form-field>
-		
+		<br/>
+    <br/>
+    <mat-spinner *ngIf="creatingLicensePlate"  diameter="30" ></mat-spinner>
 
      
         

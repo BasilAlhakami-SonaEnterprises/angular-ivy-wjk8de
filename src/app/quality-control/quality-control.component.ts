@@ -23,6 +23,7 @@ export class QualityControlComponent implements OnInit {
   createLicensePlate(){
     this.creatingLicensePlate=true;
     this.licensePlateService.createLicensePlate().subscribe(data=>{
+      console.log(data);
       this.licensePlateId=data;
       this.creatingLicensePlate=false;
       this.getLP();
@@ -32,6 +33,8 @@ export class QualityControlComponent implements OnInit {
    this.gettingLicensePlate=true;
    this.licensePlateService.getLicensePlate(this.licensePlateId).subscribe(data=>{
      this.licensePlate=data;
+     console.log("this is the license plate");
+     console.log(this.licensePlate);
      this.gettingLicensePlate=false;
    });
   }
