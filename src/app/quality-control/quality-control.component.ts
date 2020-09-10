@@ -35,11 +35,13 @@ export class QualityControlComponent implements OnInit {
      this.gettingLicensePlate=false;
    });
   }
-  getOrder(){
+  getOrderandAddToLP(){
     this.gettingOrder=true;
     this.orderService.getByTrackingNumber(this.trackingNumber).subscribe(data=>{
       this.order=data;
+      this.poNumber=this.order.PONumber;
       this.gettingOrder=false;
+      this.addOrderToLicensePlate();
     });
   }
   addOrderToLicensePlate(){
