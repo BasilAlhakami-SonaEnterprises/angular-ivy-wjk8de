@@ -22,21 +22,28 @@ export class QualityControlComponent implements OnInit {
   }
   createLicensePlate(){
     this.creatingLicensePlate=true;
-    this.licensePlateService.createLicensePlate().subscribe(data=>{
+    this.licensePlateService.createLicensePlate().subscribe(
+      (data)=>{
       console.log(data);
       this.licensePlateId=data;
       this.creatingLicensePlate=false;
       this.getLP();
-    });
+    },
+    (err)=>{console.log(err)},
+    );
   }
   getLP(){
    this.gettingLicensePlate=true;
+ 
    this.licensePlateService.getLicensePlate(this.licensePlateId).subscribe(data=>{
      this.licensePlate=data;
-     console.log("this is the license plate");
      console.log(this.licensePlate);
      this.gettingLicensePlate=false;
-   });
+     
+   },
+   (err)=>{console.log(err)}
+   );
+  
   }
   getOrderandAddToLP(){
     this.gettingOrder=true;
@@ -45,14 +52,19 @@ export class QualityControlComponent implements OnInit {
       this.poNumber=this.order.PONumber;
       this.gettingOrder=false;
       this.addOrderToLicensePlate();
-    });
+    },
+    (err)=>{console.log(err)}
+ 
+    );
   }
   addOrderToLicensePlate(){
     this.addingOrderToLicensePlate=true;
-    this.licensePlateService.addOrderToLicensePlate(this.licensePlateId,this.poNumber).subscribe(data=>{
+    this.licensePlateService.addOrderToLicensePlate(this.licensePlateId,this.poNumber).subscribe(()=>{
       this.addingOrderToLicensePlate=false;
        this.getLP();
-    });
+    },
+    (err)=>{console.log(err)}
+    );
   }
 
 
