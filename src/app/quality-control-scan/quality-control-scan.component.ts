@@ -17,9 +17,13 @@ export class QualityControlScanComponent implements OnInit {
    this.licensePlateService.getLicensePlate(this.licensePlateId)
    .subscribe(data=>{
      this.licensePlate=data;
+     this.gettingLicensePlate=false;
      console.log(this.licensePlate);
    },
-   (err)=>{console.log(err)}
+   (err)=>{
+     console.log(err);
+     this.gettingLicensePlate=false;
+   }
    );
   }
   ngOnInit() {
