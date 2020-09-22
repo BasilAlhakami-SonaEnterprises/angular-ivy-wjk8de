@@ -15,7 +15,7 @@ import { OrderService } from './services/order.service';
 import { PrintLabelComponent } from './print-label/print-label.component';
 import { LicensePlateService } from './services/licenseplate.service';
 import { QualityControlComponent } from './quality-control/quality-control.component';
-import { QualityControlStartScreenComponent } from './quality-control-start-screen/quality-control-start-screen.component';
+
 
 
 
@@ -23,7 +23,7 @@ import { QualityControlStartScreenComponent } from './quality-control-start-scre
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
-  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlStartScreenComponent],
+  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent],
   bootstrap:    [ AppComponent ],
   providers: [ OrderService, LicensePlateService]
 })
