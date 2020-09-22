@@ -23,7 +23,7 @@ export class QualityControlComponent implements OnInit {
     )
   }
   scanLicensePlate(){
-      this.router.navigate(['/scan-screen'],{queryParams:{licensePlateId:this.licensePlateId}});
+      this.router.navigate(['quality-control-scan'],{queryParams:{licensePlateId:this.licensePlateId}});
   }
  
   
