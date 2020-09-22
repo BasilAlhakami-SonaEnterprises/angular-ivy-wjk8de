@@ -1,7 +1,7 @@
   <div  fxLayout="column" fxLayoutAlign="center" fxLayoutGap="40px" class="content">
   <div  fxFlex="" fxFlexOffset="20px" fxFlexAlign="center">
   
-  <b>{{licensePlate.LicensePlateId}}</b>
+  <b *ngIf="licensePlate!=null">{{licensePlate.LicensePlateId}}</b>
   <mat-spinner *ngIf="gettingLicensePlate"  diameter="30" ></mat-spinner>
   </div>
   </div>
