@@ -1,7 +1,7 @@
   <div *ngIf="licensePlate==null" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="40px" class="content">
   <div  fxFlex="" fxFlexOffset="20px" fxFlexAlign="center">
     <div fxFlexAlign="center">
-	<button style="width: 500px;" (click)="createLicensePlate()" mat-raised-button color="primary">Create New License Plate</button>
+	<button style="width: 500px;" (click)="createAndPrintLicensePlate()" mat-raised-button color="primary">Create New License Plate</button>
 </div>
   <br/>
   <br/>
@@ -19,11 +19,11 @@
 		<div>
 			<mat-form-field style="width: 500px;"  >
 				<mat-label>Enter License Plate No</mat-label>
-				<input matInput placeholder="" value="" [(ngModel)]="licensePlateId">
+				<input matInput (keyup.enter)="scanLicensePlate()" placeholder="" value="" [(ngModel)]="licensePlateId">
       </mat-form-field>
 		<br/>
     <br/>
-    <mat-spinner *ngIf="creatingLicensePlate"  diameter="30" ></mat-spinner>
+    <mat-spinner *ngIf="creatingAndPrintingLicensePlate"  diameter="30" ></mat-spinner>
 
      
         
@@ -31,23 +31,3 @@
 	</div>
   </div>
 
-  <div *ngIf="licensePlate!=null" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="40px" class="content">
-  <div  fxFlex="" fxFlexOffset="20px" fxFlexAlign="center">
- <div fxFlexAlign="center">
-   <h3>License Plate# {{licensePlateId}}</h3><br/>
-   <br/>
-   {{licensePlate.Orders.length}} Orders
-   <br/>
-   	<div>
-			<mat-form-field style="width: 500px;"  >
-				<mat-label>Enter Purchase Order Number</mat-label>
-				<input (keyup.enter)="getOrderandAddToLP()" matInput placeholder="" value="" [(ngModel)]="trackingNumber">
-      </mat-form-field>
-		
-     
-     
-        
-		</div>
-  </div>
-  </div>
-  </div>

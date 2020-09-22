@@ -15,14 +15,15 @@ export class QualityControlComponent implements OnInit {
   }
   createAndPrintLicensePlate(){
     this.creatingAndPrintingLicensePlate=true;
-    this.licensePlateService.createLicensePlate().subscribe(()=>{
+    this.licensePlateService.createLicensePlate().subscribe((data)=>{
       this.creatingAndPrintingLicensePlate=false;
+      this.licensePlateId=data;
     },
     (err)=>{console.log(err)}
     )
-  };
+  }
   scanLicensePlate(){
-      this.router.navigate(['/scanScreen'],{queryParams:{licensePlateId:this.licensePlateId}});
+      this.router.navigate(['/scan-screen'],{queryParams:{licensePlateId:this.licensePlateId}});
   }
  
   
