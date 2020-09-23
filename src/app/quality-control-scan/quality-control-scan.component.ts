@@ -27,11 +27,9 @@ export class QualityControlScanComponent implements OnInit {
   scanFilter(scanned){
     if(scanned.length===18&&scanned[0]=='1'&&scanned[1]=='Z'){
       console.log(scanned+"  this is a tracking number");
-      // scan tracking number logic
       this.trackingNumberLogic(scanned);
     }else{
-      console.log(scanned+"   this must be a license plate number")
-      // scan license plate logic 
+      console.log(scanned+"   this must be a license plate number");
       this.licensePlateLogic(scanned);
     }
   }
@@ -39,13 +37,27 @@ export class QualityControlScanComponent implements OnInit {
      if(this.order==null){
         this.getOrder(trackingNumber);
      }
+     else if(this.order.TrackingNumber===trackingNumber){
+       // adding the order to the license getLicensePlate
+     }
   }
   licensePlateLogic(licensePlate){
-
+     
+  }
+  addOrderToLicensePlate(poNumber,licensePlateNumber){
+    
   }
   getOrder(trackingNumber){
      this.gettingOrder=true;
-
+     this.orderService.getByTrackingNumber(trackingNumber).subscribe(data=>{
+       this.order=data;
+       this.gettingOrder=false;
+     },
+     (err)=>{
+       console.log(err);
+       this.gettingOrder=false;
+       }
+     );
   }
 
 
