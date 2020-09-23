@@ -15,6 +15,7 @@ export class QualityControlScanComponent implements OnInit {
   order=null;
   gettingLicensePlate=false;
   gettingOrder=false;
+  addingOrderToLicensePlate=false;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService) { }
   @HostListener('window:keypress',['$event'])keyEvent(event:KeyboardEvent){
     if(event.key==='Enter'){
@@ -45,7 +46,15 @@ export class QualityControlScanComponent implements OnInit {
      
   }
   addOrderToLicensePlate(poNumber,licensePlateNumber){
-    
+    this.addingOrderToLicensePlate=true;
+    this.licensePlateService.addOrderToLicensePlate(licensePlateNumber,poNumber)
+    .subscribe(()=>{this.addingOrderToLicensePlate=false},
+    (err)=>{
+      console.log(err);
+      this.addingOrderToLicensePlate=false;
+      }
+
+    )
   }
   getOrder(trackingNumber){
      this.gettingOrder=true;
