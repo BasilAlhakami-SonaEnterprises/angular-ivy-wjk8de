@@ -3,5 +3,9 @@
   
   <b *ngIf="licensePlate!=null">{{licensePlate.LicensePlateId}}</b>
   <mat-spinner *ngIf="gettingLicensePlate"  diameter="30" ></mat-spinner>
+  <br/>
+  <br/>
+   <mat-spinner *ngIf="gettingOrder"  diameter="30" ></mat-spinner>
+   <b *ngIf="order!=null">{{order.PONumber}}</b>
   </div>
   </div>

@@ -38,14 +38,14 @@ export class QualityControlScanComponent implements OnInit {
      if(this.order==null){
         this.getOrder(trackingNumber);
      }
-     else if(this.order.TrackingNumber===trackingNumber){
-       // adding the order to the license getLicensePlate
+     else if(this.order.TrackingNO===trackingNumber){
+       this.addOrderToLicensePlate(this.licensePlate.LicensePlateId,this.order.PONumber);
      }
   }
   licensePlateLogic(licensePlate){
      
   }
-  addOrderToLicensePlate(poNumber,licensePlateNumber){
+  addOrderToLicensePlate(licensePlateNumber,poNumber){
     this.addingOrderToLicensePlate=true;
     this.licensePlateService.addOrderToLicensePlate(licensePlateNumber,poNumber)
     .subscribe(()=>{this.addingOrderToLicensePlate=false},
