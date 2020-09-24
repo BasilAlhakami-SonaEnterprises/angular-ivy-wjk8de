@@ -48,7 +48,9 @@ export class QualityControlScanComponent implements OnInit {
   addOrderToLicensePlate(licensePlateNumber,poNumber){
     this.addingOrderToLicensePlate=true;
     this.licensePlateService.addOrderToLicensePlate(licensePlateNumber,poNumber)
-    .subscribe(()=>{this.addingOrderToLicensePlate=false},
+    .subscribe((data)=>{
+      console.log(data);
+      this.addingOrderToLicensePlate=false},
     (err)=>{
       console.log(err);
       this.addingOrderToLicensePlate=false;
