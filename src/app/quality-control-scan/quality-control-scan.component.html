@@ -6,6 +6,12 @@
   <br/>
   <br/>
    <mat-spinner *ngIf="gettingOrder"  diameter="30" ></mat-spinner>
-   <b *ngIf="order!=null">{{order.PONumber}}</b>
+   <b *ngIf="order!=null">{{order.PONumber}}</b><br/>
+   
+   		<mat-form-field *ngIf="licensePlate!=null" style="width: 500px;"  >
+				<mat-label>Enter Tracking No</mat-label>
+				<input matInput (keyup.enter)="trackingNumberLogic(trackno)" placeholder="" value="" [(ngModel)]="trackno">
+      </mat-form-field>
   </div>
+  
   </div>

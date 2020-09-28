@@ -25,7 +25,7 @@ export class LicensePlateService {
   addOrderToLicensePlate(licensePlateId,poNumber){
     this.request.PONumber=poNumber;
     this.request.LicensePlateId=licensePlateId;
-    return this.http.post(this.urls.AddOrderToLicensePlate,this.request,{responseType: 'text'});
+    return this.http.post(this.urls.AddOrderToLicensePlate,this.request,{observe : 'response',responseType: 'text'});
   }
 
   markToteShipped(licensePlateId){
