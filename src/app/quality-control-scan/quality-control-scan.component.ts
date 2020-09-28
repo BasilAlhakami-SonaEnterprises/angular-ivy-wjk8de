@@ -2,6 +2,7 @@ import { Component, OnInit,HostListener } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {LicensePlateService} from "../services/licenseplate.service";
 import {OrderService} from "../services/order.service";
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-quality-control-scan',
@@ -16,7 +17,7 @@ export class QualityControlScanComponent implements OnInit {
   gettingLicensePlate=false;
   gettingOrder=false;
   addingOrderToLicensePlate=false;
-  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService) { }
+  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,public dialog: MatDialog) { }
   @HostListener('window:keypress',['$event'])keyEvent(event:KeyboardEvent){
     if(event.key==='Enter'){
       this.scanFilter(this.scannedValue.join(""));
@@ -40,6 +41,8 @@ export class QualityControlScanComponent implements OnInit {
      }
      else if(this.order.TrackingNO===trackingNumber){
        this.addOrderToLicensePlate(this.licensePlate.LicensePlateId,this.order.PONumber);
+     }else{
+        this.dialog.open(ExitOrderDialog);
      }
   }
   licensePlateLogic(licensePlate){
@@ -93,5 +96,9 @@ export class QualityControlScanComponent implements OnInit {
     });
     this.getLP();
   }
-
 }
+  @Component({
+    selector:'exit-order-dialog',
+    templateUrl:'exit-order-dialog.html'
+  })
+  export class ExitOrderDialog{}
