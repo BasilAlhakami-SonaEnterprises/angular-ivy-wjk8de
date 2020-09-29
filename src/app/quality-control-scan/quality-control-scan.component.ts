@@ -4,6 +4,7 @@ import {LicensePlateService} from "../services/licenseplate.service";
 import {OrderService} from "../services/order.service";
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import{ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import{ConfirmDialogService} from "../services/confirm-dialog.service";
 @Component({
   selector: 'app-quality-control-scan',
   templateUrl: './quality-control-scan.component.html',
@@ -17,19 +18,19 @@ export class QualityControlScanComponent implements OnInit {
   gettingLicensePlate=false;
   gettingOrder=false;
   addingOrderToLicensePlate=false;
-  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,public dialog: MatDialog) { }
-  dialogRef:MatDialogRef<ConfirmDialogComponent>;
+  trackingNumber;
+  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog) { }
 
 
-public open(options){
-  this.dialogRef=this.dialog.open(ConfirmDialogComponent,{
-    data:{
-      title:options.title,
-      message:options.message,
-      cancelText:options.cancelText,
-      confirmText:options.confirmText
-    }
-  });
+
+public openconfirmDialog(options){
+    this.dialogService.open(options);
+    this.dialogService.confirmed().subscribe(confirmed=>{
+      if(confirmed){
+        this.order=null;
+        this.getOrder(this.trackingNumber);
+      }
+    });
 }
 
 
@@ -60,9 +61,11 @@ public open(options){
        this.addOrderToLicensePlate(this.licensePlate.LicensePlateId,this.order.PONumber);
      }else{
         // open the dialog here 
-        this.open({"title":"testTitme","message":"this test message","cancelText":"cancel","confirmText":"yes"});
+        this.trackingNumber=trackingNumber;
+        this.openconfirmDialog({"title":"You scanned another Tracking Number","message":"You scanned another tracking number while the current one wasn't dealt with yet, are you sure you want to switch to what you just scanned?","cancelText":"Cancel","confirmText":"Yes"});
      }
   }
+ 
   licensePlateLogic(licensePlate){
      
   }
