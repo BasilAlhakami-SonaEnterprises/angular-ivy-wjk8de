@@ -5,15 +5,32 @@
   <mat-spinner *ngIf="gettingLicensePlate"  diameter="30" ></mat-spinner>
   <br/>
   <br/>
-   <mat-spinner *ngIf="gettingOrder"  diameter="30" ></mat-spinner>
-   <b *ngIf="order!=null">{{order.PONumber}}</b><br/>
+
+
 
    		<mat-form-field *ngIf="licensePlate!=null" style="width: 500px;"  >
 				<mat-label>Enter Tracking No</mat-label>
 				<input matInput (keyup.enter)="trackingNumberLogic(trackno)" placeholder="" value="" [(ngModel)]="trackno">
-      </mat-form-field>
+      </mat-form-field><br/>
 
     
+          <b *ngIf="order!=null">{{order.PONumber}}</b><br/>
+       <mat-spinner *ngIf="gettingOrder"  diameter="30" ></mat-spinner>
+       <table *ngIf="order!=null" mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+           <ng-container matColumnDef="item">
+    <th mat-header-cell *matHeaderCellDef> Item </th>
+    <td mat-cell *matCellDef="let element"> {{element.Item}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="qty">
+  <th mat-header-cell *matHeaderCellDef> Quantity </th>
+    <td mat-cell *matCellDef="let element"> {{element.QTY}} </td>
+  </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
       
   </div>
   

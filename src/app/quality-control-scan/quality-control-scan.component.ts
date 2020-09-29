@@ -15,10 +15,12 @@ export class QualityControlScanComponent implements OnInit {
   licensePlate=null;
   scannedValue=[];
   order=null;
+  dataSource = null;
   gettingLicensePlate=false;
   gettingOrder=false;
   addingOrderToLicensePlate=false;
   orderAdded=false;
+  displayedColumns: string[] = ['item','qty'];
   trackingNumber;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar) { }
 
@@ -99,6 +101,7 @@ openSnackBar(message:string,action:string){
      this.gettingOrder=true;
      this.orderService.getByTrackingNumber(trackingNumber).subscribe(data=>{
        this.order=data;
+       this.dataSource=this.order.Lines;
        this.gettingOrder=false;
      },
      (err)=>{
