@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {LicensePlateService} from "../services/licenseplate.service";
 import {OrderService} from "../services/order.service";
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
-import{ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {MatSnackBar} from '@angular/material/snack-bar';
 import{ConfirmDialogService} from "../services/confirm-dialog.service";
 @Component({
   selector: 'app-quality-control-scan',
@@ -20,7 +20,7 @@ export class QualityControlScanComponent implements OnInit {
   addingOrderToLicensePlate=false;
   orderAdded=false;
   trackingNumber;
-  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog) { }
+  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar) { }
 
 
 
@@ -33,8 +33,11 @@ public openconfirmDialog(options){
       }
     });
 }
-
-
+openSnackBar(message:string,action:string){
+  this._snackBar.open(message,action,{
+    duration:3000.
+  });
+}
 
 
   @HostListener('window:keypress',['$event'])keyEvent(event:KeyboardEvent){
@@ -81,7 +84,7 @@ public openconfirmDialog(options){
     .subscribe((data)=>{
       console.log(data);
       if(data.status==200){
-      this.orderAdded=true;
+      this.openSnackBar("order added to LP","dismiss")
       this.order=null;
       }
       this.addingOrderToLicensePlate=false},
