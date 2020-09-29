@@ -47,6 +47,10 @@ public openconfirmDialog(options){
   }
   scanFilter(scanned){
     this.orderAdded=false;
+    if(scanned.length===0){
+      console.log("nothing scanned");
+       return;
+    }
     if(scanned.length===18&&scanned[0]=='1'&&scanned[1]=='Z'){
       console.log(scanned+"  this is a tracking number");
       this.trackingNumberLogic(scanned);
