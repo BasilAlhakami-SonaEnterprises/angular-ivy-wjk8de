@@ -18,6 +18,7 @@ export class QualityControlScanComponent implements OnInit {
   gettingLicensePlate=false;
   gettingOrder=false;
   addingOrderToLicensePlate=false;
+  orderAdded=false;
   trackingNumber;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog) { }
 
@@ -45,6 +46,7 @@ public openconfirmDialog(options){
     }
   }
   scanFilter(scanned){
+    this.orderAdded=false;
     if(scanned.length===18&&scanned[0]=='1'&&scanned[1]=='Z'){
       console.log(scanned+"  this is a tracking number");
       this.trackingNumberLogic(scanned);
@@ -74,6 +76,10 @@ public openconfirmDialog(options){
     this.licensePlateService.addOrderToLicensePlate(licensePlateNumber,poNumber)
     .subscribe((data)=>{
       console.log(data);
+      if(data.status==200){
+      this.orderAdded=true;
+      this.order=null;
+      }
       this.addingOrderToLicensePlate=false},
     (err)=>{
       console.log(err);
