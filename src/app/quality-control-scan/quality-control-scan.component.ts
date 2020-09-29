@@ -2,7 +2,8 @@ import { Component, OnInit,HostListener } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {LicensePlateService} from "../services/licenseplate.service";
 import {OrderService} from "../services/order.service";
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
+import{ConfirmDialogComponent} from "../app/confirm-dialog/confirm-dialog.component";
 @Component({
   selector: 'app-quality-control-scan',
   templateUrl: './quality-control-scan.component.html',
@@ -17,6 +18,23 @@ export class QualityControlScanComponent implements OnInit {
   gettingOrder=false;
   addingOrderToLicensePlate=false;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,public dialog: MatDialog) { }
+  dialogRef:MatDialogRef<ConfirmDialogComponent>;
+
+
+public open(options){
+  this.dialogRef=this.dialog.open(ConfirmDialogComponent,{
+    data:{
+      title:options.title,
+      message:options.message,
+      cancelText:options.cancelText,
+      confirmText:options.confirmText
+    }
+  });
+}
+
+
+
+
   @HostListener('window:keypress',['$event'])keyEvent(event:KeyboardEvent){
     if(event.key==='Enter'){
       this.scanFilter(this.scannedValue.join(""));
@@ -42,7 +60,7 @@ export class QualityControlScanComponent implements OnInit {
        this.addOrderToLicensePlate(this.licensePlate.LicensePlateId,this.order.PONumber);
      }else{
         // open the dialog here 
-        this.dialog.open(ExitOrderDialog);
+        this.open({"title":"testTitme","message":"this test message","cancelText":"cancel","confirmText":"yes"});
      }
   }
   licensePlateLogic(licensePlate){

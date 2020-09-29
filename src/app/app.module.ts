@@ -16,6 +16,8 @@ import { PrintLabelComponent } from './print-label/print-label.component';
 import { LicensePlateService } from './services/licenseplate.service';
 import { QualityControlComponent } from './quality-control/quality-control.component';
 import { ExitOrderDialog,QualityControlScanComponent } from './quality-control-scan/quality-control-scan.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './services/confirm-dialog.service';
 
 
 
@@ -26,8 +28,8 @@ import { ExitOrderDialog,QualityControlScanComponent } from './quality-control-s
 @NgModule({
   entryComponents:[ExitOrderDialog],
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
-  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ExitOrderDialog],
+  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ExitOrderDialog, ConfirmDialogComponent],
   bootstrap:    [ AppComponent ],
-  providers: [ OrderService, LicensePlateService]
+  providers: [ OrderService, LicensePlateService, ConfirmDialogService]
 })
 export class AppModule { }
