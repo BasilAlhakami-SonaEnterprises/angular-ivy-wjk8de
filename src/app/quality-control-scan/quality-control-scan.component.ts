@@ -15,12 +15,10 @@ export class QualityControlScanComponent implements OnInit {
   licensePlate=null;
   scannedValue=[];
   order=null;
-  dataSource = null;
+  error=null;
   gettingLicensePlate=false;
   gettingOrder=false;
   addingOrderToLicensePlate=false;
-  orderAdded=false;
-  displayedColumns: string[] = ['item','qty'];
   trackingNumber;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar) { }
 
@@ -43,6 +41,7 @@ openSnackBar(message:string,action:string){
 
 
   @HostListener('window:keypress',['$event'])keyEvent(event:KeyboardEvent){
+    this.error=null;
     if(event.key==='Enter'){
       this.scanFilter(this.scannedValue.join(""));
       this.scannedValue=[];
@@ -51,7 +50,6 @@ openSnackBar(message:string,action:string){
     }
   }
   scanFilter(scanned){
-    this.orderAdded=false;
     if(scanned.length===0){
       console.log("nothing scanned");
        return;
@@ -92,6 +90,8 @@ openSnackBar(message:string,action:string){
       this.addingOrderToLicensePlate=false},
     (err)=>{
       console.log(err);
+       this.error=err.error;
+       this.order=null;
       this.addingOrderToLicensePlate=false;
       }
 
@@ -101,7 +101,6 @@ openSnackBar(message:string,action:string){
      this.gettingOrder=true;
      this.orderService.getByTrackingNumber(trackingNumber).subscribe(data=>{
        this.order=data;
-       this.dataSource=this.order.Lines;
        this.gettingOrder=false;
      },
      (err)=>{

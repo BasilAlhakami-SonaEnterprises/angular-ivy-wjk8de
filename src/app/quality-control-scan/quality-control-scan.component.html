@@ -14,24 +14,15 @@
       </mat-form-field><br/>
 
     
-          <b *ngIf="order!=null">{{order.PONumber}}</b><br/>
+          <b *ngIf="order!=null">{{order.PONumber}}</b><br/><br/>
        <mat-spinner *ngIf="gettingOrder"  diameter="30" ></mat-spinner>
-       <table *ngIf="order!=null" mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
-           <ng-container matColumnDef="item">
-    <th mat-header-cell *matHeaderCellDef> Item </th>
-    <td mat-cell *matCellDef="let element"> {{element.Item}} </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="qty">
-  <th mat-header-cell *matHeaderCellDef> Quantity </th>
-    <td mat-cell *matCellDef="let element"> {{element.QTY}} </td>
-  </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-      
+       <div *ngIf="order!=null">
+        <div  *ngFor='let line of order.Lines;'>
+      <h1>  {{line.Item}} &nbsp; &nbsp;&nbsp; {{line.QTY}}</h1>  <h1></h1>
+  
+         </div>
+         </div>
+        <div *ngIf="error!=null"><h1 style="color:red;">{{error}}</h1></div>
   </div>
   
   </div>
