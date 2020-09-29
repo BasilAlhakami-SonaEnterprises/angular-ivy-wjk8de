@@ -99,7 +99,7 @@ openSnackBar(message:string,action:string){
   }
   getOrder(trackingNumber){
      this.gettingOrder=true;
-     this.orderService.getByTrackingNumber(trackingNumber).subscribe(data=>{
+     this.orderService.getByTrackingNumber(trackingNumber.toUpperCase()).subscribe(data=>{
        this.order=data;
        this.gettingOrder=false;
      },
