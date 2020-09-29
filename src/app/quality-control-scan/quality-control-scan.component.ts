@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {LicensePlateService} from "../services/licenseplate.service";
 import {OrderService} from "../services/order.service";
 import {MatDialog} from '@angular/material/dialog';
-
 @Component({
   selector: 'app-quality-control-scan',
   templateUrl: './quality-control-scan.component.html',
@@ -42,6 +41,7 @@ export class QualityControlScanComponent implements OnInit {
      else if(this.order.TrackingNO===trackingNumber){
        this.addOrderToLicensePlate(this.licensePlate.LicensePlateId,this.order.PONumber);
      }else{
+        // open the dialog here 
         this.dialog.open(ExitOrderDialog);
      }
   }
@@ -97,8 +97,9 @@ export class QualityControlScanComponent implements OnInit {
     this.getLP();
   }
 }
-  @Component({
-    selector:'exit-order-dialog',
-    templateUrl:'exit-order-dialog.html'
-  })
-  export class ExitOrderDialog{}
+@Component({
+  selector:'exit-order-dialog',
+  templateUrl:'exit-order-dialog.html'
+})
+export class ExitOrderDialog{}
+

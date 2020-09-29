@@ -1,8 +1,7 @@
-  <h2 mat-dialog-title>Exiting Order </h2>
-      <mat-dialog-content class="mat-typography">
-       <h3>the current order was not added to the license plate, are you sure you want to move on to what you just scanned?</h3>
-      </mat-dialog-content>
-      <mat-dialog-actions align="end">
-          <button mat-button mat-dialog-close>Cancel</button>
-            <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
-      </mat-dialog-actions>
+<h1 mat-dialog-title>You scanned another Tracking Number</h1>
+<div mat-dialog-content> 
+You scanned another tracking number while the current one isn't dealt with yet, are you sure you want to switch to what you just scanned?
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
