@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {LicensePlateService} from "../services/licenseplate.service";
 import {OrderService} from "../services/order.service";
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
-import{ConfirmDialogComponent} from "../app/confirm-dialog/confirm-dialog.component";
+import{ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 @Component({
   selector: 'app-quality-control-scan',
   templateUrl: './quality-control-scan.component.html',
@@ -115,9 +115,4 @@ public open(options){
     this.getLP();
   }
 }
-@Component({
-  selector:'exit-order-dialog',
-  templateUrl:'exit-order-dialog.html'
-})
-export class ExitOrderDialog{}
 
