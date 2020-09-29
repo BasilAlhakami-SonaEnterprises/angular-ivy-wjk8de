@@ -75,8 +75,10 @@ openSnackBar(message:string,action:string){
      }
   }
  
-  licensePlateLogic(licensePlate){
-     
+  licensePlateLogic(licensePlateId){
+     if(licensePlateId===this.licensePlate.LicensePlateId){
+
+     }
   }
   addOrderToLicensePlate(licensePlateNumber,poNumber){
     this.addingOrderToLicensePlate=true;
