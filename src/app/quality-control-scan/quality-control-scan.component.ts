@@ -23,6 +23,7 @@ export class QualityControlScanComponent implements OnInit {
   gettingOrder=false;
   addingOrderToLicensePlate=false;
   showConfirmQuantityForm=false;
+  emptyingLicnensePlate=false;
   trackingNumber;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar,private router:Router) { }
 
@@ -97,7 +98,7 @@ openSnackBar(message:string,action:string){
        this.markLicensePlateShipped(this.licensePlate.LicensePlateId);
 
     }else{
-        this.error="the count you entered is incorrect please recount "
+        this.error="the count you entered is incorrect please rescan wait for the spinner to finish first "
     }
       this.showConfirmQuantityForm=false;
   }
@@ -151,6 +152,24 @@ openSnackBar(message:string,action:string){
       (err)=>{
         this.error=err.error;
         this.markingLicensePlate=false;
+      }
+    )
+  }
+
+  emptyLicensePlate(licensePlateId){
+    this.emptyingLicnensePlate=true;
+    this.licensePlateService.emptyLicensePlate(licensePlateId)
+    .subscribe((data)=>{
+      if(data.status==200){
+          this.error=null;
+           this.openSnackBar("start re scanning all orders","dismiss")
+
+      }
+       this.emptyingLicnensePlate=false;
+    },
+     (err)=>{
+        this.error=err.error;
+         this.emptyingLicnensePlate=false;
       }
     )
   }

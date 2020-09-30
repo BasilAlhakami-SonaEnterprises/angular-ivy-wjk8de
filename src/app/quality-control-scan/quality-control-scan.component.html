@@ -33,6 +33,9 @@
         <br/>
         <br/>
         <mat-spinner *ngIf="addingOrderToLicensePlate"  diameter="30" ></mat-spinner>
+               <mat-spinner *ngIf="emptyingLicnensePlate"  diameter="30" ></mat-spinner>
+     <mat-spinner *ngIf="markingLicensePlate"  diameter="30" ></mat-spinner>
+
       <mat-form-field *ngIf="showConfirmQuantityForm" style="width: 500px;">
              				<mat-label>how many orders in this License Plate</mat-label>
        			<input  matInput  placeholder="confirm how many orders in this License Plate" value="" [(ngModel)]="count"> 
