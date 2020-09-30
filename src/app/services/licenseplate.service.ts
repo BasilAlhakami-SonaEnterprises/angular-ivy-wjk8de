@@ -6,7 +6,7 @@ export class LicensePlateService {
       CreateLicensePlate:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/CreateLicensePlate/",
       GetLicensePlate:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetLicensePlate/",
       AddOrderToLicensePlate:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/AddOrderToLicensePlate?",
-      MarkToteShipped:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkToteShipped?"
+      MarkLicensePlateShipped:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkLicensePlateShipped?"
    };
    request={
      PONumber:"",
@@ -28,8 +28,8 @@ export class LicensePlateService {
     return this.http.post(this.urls.AddOrderToLicensePlate,this.request,{observe : 'response',responseType: 'text'});
   }
 
-  markToteShipped(licensePlateId){
+  markLicensePlateShipped(licensePlateId){
     this.request.LicensePlateId=licensePlateId;
-    return this.http.post(this.urls.MarkToteShipped,this.request);
+    return this.http.post(this.urls.MarkLicensePlateShipped,this.request,{observe : 'response',responseType: 'text'});
   }
 }

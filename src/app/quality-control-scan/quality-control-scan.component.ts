@@ -18,6 +18,7 @@ export class QualityControlScanComponent implements OnInit {
   order=null;
   error=null;
   gettingLicensePlate=false;
+  markingLicensePlate=false;
   gettingOrder=false;
   addingOrderToLicensePlate=false;
   showConfirmQuantityForm=false;
@@ -92,6 +93,7 @@ openSnackBar(message:string,action:string){
     this.error=null;
     if(count==this.licensePlate.Orders.length){
        console.log("count is correct confrim");
+       this.markLicensePlateShipped(this.licensePlate.LicensePlateId);
 
     }else{
         this.error="the count you entered is incorrect please recount "
@@ -132,7 +134,23 @@ openSnackBar(message:string,action:string){
        }
      );
   }
-
+  
+  markLicensePlateShipped(licensePlateId){
+    this.markingLicensePlate=true;
+    this.licensePlateService.markLicensePlateShipped(licensePlateId)
+    .subscribe((data)=>{
+      console.log(data);
+      if(data.status==200){
+        this.openSnackBar("this LP is marked confirmed","dismiss")
+      } 
+      this.markingLicensePlate=false;
+    },
+      (err)=>{
+        this.error=err.error;
+        this.markingLicensePlate=false;
+      }
+    )
+  }
 
   getLP(){
    this.gettingLicensePlate=true;
