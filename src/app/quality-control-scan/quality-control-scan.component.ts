@@ -161,6 +161,7 @@ openSnackBar(message:string,action:string){
     this.emptyingLicnensePlate=true;
     this.licensePlateService.emptyLicensePlate(licensePlateId)
     .subscribe((data)=>{
+      console.log(data);
       if(data.status==200){
           this.error=null;
            this.openSnackBar("start re scanning all orders","dismiss")
@@ -169,6 +170,7 @@ openSnackBar(message:string,action:string){
        this.emptyingLicnensePlate=false;
     },
      (err)=>{
+       console.log(err);
         this.error=err.error;
          this.emptyingLicnensePlate=false;
       }
@@ -178,10 +180,11 @@ openSnackBar(message:string,action:string){
   getLP(){
    this.gettingLicensePlate=true;
    this.licensePlateService.getLicensePlate(this.licensePlateId)
-   .subscribe(data=>{
-     this.licensePlate=data;
+   .subscribe((data)=>{
+     console.log(data);
+     this.licensePlate=data.body;
      this.gettingLicensePlate=false;
-     console.log(this.licensePlate);
+ 
    },
    (err)=>{
      console.log(err);
