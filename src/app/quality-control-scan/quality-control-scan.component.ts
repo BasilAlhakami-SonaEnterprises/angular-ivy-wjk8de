@@ -14,11 +14,13 @@ export class QualityControlScanComponent implements OnInit {
   licensePlateId;
   licensePlate=null;
   scannedValue=[];
+  count;
   order=null;
   error=null;
   gettingLicensePlate=false;
   gettingOrder=false;
   addingOrderToLicensePlate=false;
+  showConfirmQuantityForm=false;
   trackingNumber;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar) { }
 
@@ -41,7 +43,6 @@ openSnackBar(message:string,action:string){
 
 
   @HostListener('window:keypress',['$event'])keyEvent(event:KeyboardEvent){
-    this.error=null;
     if(event.key==='Enter'){
       this.scanFilter(this.scannedValue.join(""));
       this.scannedValue=[];
@@ -55,10 +56,16 @@ openSnackBar(message:string,action:string){
        return;
     }
     if(scanned.length===18&&scanned[0]=='1'&&scanned[1]=='Z'){
+          this.error=null;
+    this.showConfirmQuantityForm=false;
+    this.count=null;
       console.log(scanned+"  this is a tracking number");
       this.trackingNumberLogic(scanned);
-    }else{
+    }else if(scanned.length===24) {
       console.log(scanned+"   this must be a license plate number");
+     this.error=null;
+     this.showConfirmQuantityForm=false;
+     this.count=null;
       this.licensePlateLogic(scanned);
     }
   }
@@ -77,9 +84,23 @@ openSnackBar(message:string,action:string){
  
   licensePlateLogic(licensePlateId){
      if(licensePlateId===this.licensePlate.LicensePlateId){
-
+        this.getLP();
+         this.showConfirmQuantityForm=true;
      }
   }
+  confirmCount(count){
+    this.error=null;
+    if(count==this.licensePlate.Orders.length){
+       console.log("count is correct confrim");
+
+    }else{
+        this.error="the count you entered is incorrect please recount "
+    }
+      this.showConfirmQuantityForm=false;
+  }
+
+
+
   addOrderToLicensePlate(licensePlateNumber,poNumber){
     this.addingOrderToLicensePlate=true;
     this.licensePlateService.addOrderToLicensePlate(licensePlateNumber,poNumber)

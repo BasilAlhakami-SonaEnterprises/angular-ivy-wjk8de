@@ -11,7 +11,13 @@
    		<mat-form-field *ngIf="licensePlate!=null" style="width: 500px;"  >
 				<mat-label>Enter Tracking No</mat-label>
 				<input matInput (keyup.enter)="trackingNumberLogic(trackno)" placeholder="" value="" [(ngModel)]="trackno">
-      </mat-form-field><br/>
+       
+      </mat-form-field>
+      <mat-form-field style="width: 500px;">
+       				<mat-label>license plate No</mat-label>
+				<input matInput (keyup.enter)="licensePlateLogic(lpn)" placeholder="" value="" [(ngModel)]="lpn">
+      </mat-form-field>
+      <br/>
 
     
           <b *ngIf="order!=null">{{order.PONumber}}</b><br/><br/>
@@ -27,6 +33,12 @@
         <br/>
         <br/>
         <mat-spinner *ngIf="addingOrderToLicensePlate"  diameter="30" ></mat-spinner>
+      <mat-form-field *ngIf="showConfirmQuantityForm" style="width: 500px;">
+             				<mat-label>how many orders in this License Plate</mat-label>
+       			<input  matInput  placeholder="confirm how many orders in this License Plate" value="" [(ngModel)]="count"> 
+       
+      </mat-form-field>
+            	<button *ngIf="showConfirmQuantityForm"  (click)="confirmCount(count)" mat-raised-button color="primary">confirm</button>
   </div>
   
   </div>
