@@ -23,6 +23,10 @@
          </div>
          </div>
         <div *ngIf="error!=null"><h1 style="color:red;">{{error}}</h1></div>
+
+        <br/>
+        <br/>
+        <mat-spinner *ngIf="addingOrderToLicensePlate"  diameter="30" ></mat-spinner>
   </div>
   
   </div>
