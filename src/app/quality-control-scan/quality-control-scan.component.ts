@@ -182,7 +182,7 @@ openSnackBar(message:string,action:string){
    this.licensePlateService.getLicensePlate(this.licensePlateId)
    .subscribe((data)=>{
      console.log(data);
-     this.licensePlate=data.body;
+     this.licensePlate=JSON.parse(data.body);
      this.gettingLicensePlate=false;
  
    },
