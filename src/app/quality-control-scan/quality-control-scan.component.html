@@ -5,7 +5,7 @@
   <mat-spinner *ngIf="gettingLicensePlate"  diameter="30" ></mat-spinner>
   <br/>
   <br/>
-
+      
 
 
    		<mat-form-field *ngIf="licensePlate!=null" style="width: 500px;"  >
@@ -22,7 +22,7 @@
   
          </div>
          </div>
-        <div *ngIf="error!=null"><h1 style="color:red;">{{error}}</h1></div>
+  <h3 *ngIf="error!=null" style="color:red;">{{error}}</h3>
 
         <br/>
         <br/>
