@@ -11,11 +11,12 @@ export class QualityControlComponent implements OnInit {
   constructor(private licensePlateService:LicensePlateService,private router:Router) { }
    creatingAndPrintingLicensePlate=false;
    licensePlateId
+   printerNumber='';
   ngOnInit() {
   }
   createAndPrintLicensePlate(){
     this.creatingAndPrintingLicensePlate=true;
-    this.licensePlateService.createLicensePlate().subscribe((data)=>{
+    this.licensePlateService.createLicensePlate(printerNumber).subscribe((data)=>{
       this.creatingAndPrintingLicensePlate=false;
       this.licensePlateId=data;
     },

@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 @Injectable()
 export class LicensePlateService {
     urls = {
-      CreateLicensePlate:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/CreateLicensePlate?",
+      CreateLicensePlate:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/CreateLicensePlate/",
       GetLicensePlate:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetLicensePlate/",
       AddOrderToLicensePlate:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/AddOrderToLicensePlate?",
       MarkToteShipped:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkToteShipped?"
@@ -14,8 +14,8 @@ export class LicensePlateService {
    };
   constructor(private http: HttpClient) { }
   
-  createLicensePlate(){
-    return this.http.get(this.urls.CreateLicensePlate,{responseType: 'text'});
+  createLicensePlate(printerNumber){
+    return this.http.get(this.urls.CreateLicensePlate+printerNumber,{responseType: 'text'});
   }
 
   getLicensePlate(licensePlateId){
