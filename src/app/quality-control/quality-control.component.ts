@@ -41,6 +41,7 @@ export class QualityControlComponent implements OnInit {
 
   createAndPrintLicensePlate(){
     this.creatingAndPrintingLicensePlate=true;
+    this.error=null;
     this.licensePlateService.createLicensePlate(this.printerNumber).subscribe((data)=>{
       this.creatingAndPrintingLicensePlate=false;
       this.licensePlateId=data;
