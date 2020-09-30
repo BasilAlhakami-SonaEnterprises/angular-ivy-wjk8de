@@ -5,6 +5,7 @@ import {OrderService} from "../services/order.service";
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import{ConfirmDialogService} from "../services/confirm-dialog.service";
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-quality-control-scan',
   templateUrl: './quality-control-scan.component.html',
@@ -23,7 +24,7 @@ export class QualityControlScanComponent implements OnInit {
   addingOrderToLicensePlate=false;
   showConfirmQuantityForm=false;
   trackingNumber;
-  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar) { }
+  constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar,private router:Router) { }
 
 
 
@@ -141,7 +142,9 @@ openSnackBar(message:string,action:string){
     .subscribe((data)=>{
       console.log(data);
       if(data.status==200){
-        this.openSnackBar("this LP is marked confirmed","dismiss")
+      this.openSnackBar("this LP is marked confirmed back to the main QC page","dismiss")
+        this.router.navigate(['quality-control'])
+
       } 
       this.markingLicensePlate=false;
     },
