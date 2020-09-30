@@ -163,7 +163,7 @@ openSnackBar(message:string,action:string){
     .subscribe((data)=>{
       console.log(data);
       if(data.status==200){
-          this.error=null;
+         
            this.openSnackBar("start re scanning all orders","dismiss")
 
       }

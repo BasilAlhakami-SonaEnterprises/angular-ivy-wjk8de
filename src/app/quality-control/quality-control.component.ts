@@ -35,7 +35,7 @@ export class QualityControlComponent implements OnInit {
     }else{
       console.log(scanned+"   this must be a license plate number");
        console.log(scanned);
-       this.licensePlateId=scanned.toString();
+       this.licensePlateId=scanned;
          this.scanLicensePlate();
     }
   }
