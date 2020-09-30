@@ -99,6 +99,7 @@ openSnackBar(message:string,action:string){
 
     }else{
         this.error="the count you entered is incorrect please rescan wait for the spinner to finish first "
+        this.emptyLicensePlate(this.licensePlate.LicensePlateId);
     }
       this.showConfirmQuantityForm=false;
   }

@@ -13,7 +13,7 @@
 				<input matInput (keyup.enter)="trackingNumberLogic(trackno)" placeholder="" value="" [(ngModel)]="trackno">
        
       </mat-form-field>
-      <mat-form-field style="width: 500px;">
+      <mat-form-field *ngIf="licensePlate!=null" style="width: 500px;">
        				<mat-label>license plate No</mat-label>
 				<input matInput (keyup.enter)="licensePlateLogic(lpn)" placeholder="" value="" [(ngModel)]="lpn">
       </mat-form-field>
