@@ -1,0 +1,26 @@
+<div fxLayout='row' fxLayoutAlign="start center"   style="" *ngFor="let line of lines" style=" padding:6%; background-color: black; color: white;" class="mat-display-3">
+	<div fxFlex="auto"  >{{line.Item}}</div>
+	<div fxFlex="auto"  style=" text-align:right;" ><button mat-fab class="mat-display-3">{{line.QTY}}</button></div>
+</div>
+
+<div fxLayout='row' >
+  <div fxFlex="auto" style="padding-left:6%;">PO: {{PONumber}}</div>
+</div>
+
+<div fxLayout='row' >
+  <div fxFlex="auto" style="padding-left:6%;">Ship Method: {{PONumber}}</div>
+</div>
+
+<div fxLayout='row' >
+  <div fxFlex="auto" style="padding-left:6%;">Tracking Number: {{PONumber}}</div>
+</div>
+
+<div fxLayout='row' >
+  <div fxFlex="auto" style="padding-left:6%;">Shipping Date: {{PONumber}}</div>
+</div>
+
+<div fxLayout='row' style="margin-top: 20px;">
+  <div fxFlex="auto" style="padding-left:6%;">
+    <button mat-raised-button color="primary" class = "mat-display-3" (click)="nextClick()"> Next </button>
+    </div>
+</div>

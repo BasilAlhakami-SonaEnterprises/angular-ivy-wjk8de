@@ -18,6 +18,7 @@ import { QualityControlComponent } from './quality-control/quality-control.compo
 import {QualityControlScanComponent } from './quality-control-scan/quality-control-scan.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogService } from './services/confirm-dialog.service';
+import { ItemPickingComponent } from './item-picking/item-picking.component';
 
 
 
@@ -28,7 +29,7 @@ import { ConfirmDialogService } from './services/confirm-dialog.service';
 @NgModule({
   entryComponents:[ConfirmDialogComponent],
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
-  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ConfirmDialogComponent],
+  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ConfirmDialogComponent, ItemPickingComponent],
   bootstrap:    [ AppComponent ],
   providers: [ OrderService, LicensePlateService, ConfirmDialogService]
 })
