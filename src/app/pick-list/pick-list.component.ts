@@ -40,4 +40,6 @@ export class PickListComponent implements OnInit {
           this.ShipsLaterOtherLoading=false;
     });
   }
+    selectionClick(selection){
+}
 }

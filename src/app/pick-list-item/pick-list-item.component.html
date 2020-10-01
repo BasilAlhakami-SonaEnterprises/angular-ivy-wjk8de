@@ -1,22 +1,14 @@
-<!-- <div class="container" style="height: 100%;"  fxLayout="column" fxLayoutAlign="start" >
-	<table  mat-table [dataSource]="data" class="mat-elevation-z8" >
-		<mat-text-column name="Code"></mat-text-column>
-		<mat-text-column name="Qty"></mat-text-column>
 
-		<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-		<tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-	</table>
+<div style="padding-left: 16px;"><h4>{{selection}}</h4></div>
 
-</div> -->
-
-<!-- two line list -->
 <mat-nav-list >
 	<mat-list-item  *ngFor="let link of data" >
-		<a matLine href="javascript:void(0)">{{ link.Code }}</a>
+		<a matLine routerLink="/item-picking/{{selection}}/{{link.Item}}" routerLinkActive="active">{{ link.Item }}</a>
 		<button mat-icon-button>
-        {{link.Qty}}
+        {{link.QTY}}
      </button>
 	</mat-list-item>
 </mat-nav-list>
+
 
 
