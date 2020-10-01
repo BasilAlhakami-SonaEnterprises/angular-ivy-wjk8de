@@ -11,7 +11,7 @@ export class PickListItemComponent implements OnInit {
 
   data; // [{Code: "FS374", Qty: 13}, {Code: "DD312", Qty: 20}];
   selection;
-
+  loading=false;
   constructor(
     private route: ActivatedRoute,
     private orderService: OrderService
@@ -47,28 +47,36 @@ export class PickListItemComponent implements OnInit {
   }
 
   loadShipsTodayNextDayList() {
+    this.loading=true;
     this.orderService.getShipsTodayNextDayItemList().subscribe(data => {
+         this.loading=false;
       console.log(data);
       this.data = data;
     });
   }
 
   loadShipsTodayOtherList() {
+        this.loading=true;
     this.orderService.getShipsTodayOtherItemList().subscribe(data => {
+        this.loading=false;
       console.log(data);
       this.data = data;
     });
   }
 
   loadShipsLaterNextDayList() {
+        this.loading=true;
     this.orderService.getShipsLaterNextDayItemList().subscribe(data => {
+              this.loading=false;
       console.log(data);
       this.data = data;
     });
   }
 
   loadShipsLaterOtherList() {
+        this.loading=true;
     this.orderService.getShipsLaterOtherItemList().subscribe(data => {
+              this.loading=false;
       console.log(data);
       this.data = data;
     });

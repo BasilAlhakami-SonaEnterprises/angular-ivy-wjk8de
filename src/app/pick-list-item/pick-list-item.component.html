@@ -1,6 +1,6 @@
 
 <div style="padding-left: 16px;"><h4>{{selection}}</h4></div>
-
+  <mat-spinner *ngIf="loading"  diameter="30" ></mat-spinner>
 <mat-nav-list >
 	<mat-list-item  *ngFor="let link of data" >
 		<a matLine routerLink="/item-picking/{{selection}}/{{link.Item}}" routerLinkActive="active">{{ link.Item }}</a>
