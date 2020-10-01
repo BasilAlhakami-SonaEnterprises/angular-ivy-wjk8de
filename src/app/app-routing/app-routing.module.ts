@@ -12,7 +12,7 @@ const routes: Routes = [
    { path: "item-selection/:id", component: PickListItemComponent },
   { path: "print-label", component: PrintLabelComponent },
   {path:"quality-control",component:QualityControlComponent},
-  {path:"quality-control-scan",component:QualityControlScanComponent}
+  {path:"quality-control-scan",component:QualityControlScanComponent},
  { path: "item-picking/:selection/:item", component: ItemPickingComponent}
  
 ];
