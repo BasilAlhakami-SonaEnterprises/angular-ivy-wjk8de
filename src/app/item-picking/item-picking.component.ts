@@ -12,6 +12,11 @@ selection;
   item = "Hit next to start.";
   qty = "";
   lines = [{ Item: "Hit next to start" }];
+  poNumber = "";
+  shipMethod = "";
+  trackingNumber = "";
+  shippingDate  = "";
+
 
   constructor(
     private route: ActivatedRoute,
@@ -37,8 +42,13 @@ selection;
 
         } else {
           console.log(data);
+          this.PONumber = 
           this.qty = data.QTY;
           this.lines = data.Lines;
+          this.poNumber = data.PONumber;
+          this.shipMethod = data.ShipMethod;
+          this.trackingNumber = data.TrackingNO;
+          this.shippingDate = data.RequiredShipDate;
         }
       });
   }
