@@ -25,6 +25,7 @@ export class QualityControlScanComponent implements OnInit {
   showConfirmQuantityForm=false;
   emptyingLicnensePlate=false;
   trackingNumber;
+  shipDate;
   constructor(private route:ActivatedRoute,private licensePlateService:LicensePlateService,private orderService:OrderService,private dialogService:ConfirmDialogService,public dialog: MatDialog,private _snackBar: MatSnackBar,private router:Router) { }
 
 

@@ -3,21 +3,21 @@ import { ActivatedRoute } from "@angular/router";
 import { OrderService } from "../services/order.service";
 
 @Component({
-  selector: 'app-item-picking',
-  templateUrl: './item-picking.component.html',
-  styleUrls: ['./item-picking.component.css']
+  selector: "app-item-picking",
+  templateUrl: "./item-picking.component.html",
+  styleUrls: ["./item-picking.component.css"]
 })
 export class ItemPickingComponent implements OnInit {
-selection;
+  selection;
   item = "Hit next to start.";
   qty = "";
   lines = [{ Item: "Hit next to start" }];
   poNumber = "";
   shipMethod = "";
   trackingNumber = "";
-  shippingDate  = "";
+  shippingDate = "";
   printer = "";
-
+  error = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -37,22 +37,25 @@ selection;
     console.log(this.printer);
     this.orderService
       .getItemLabel(this.selection, this.item, this.printer)
-      .subscribe(data => {
-        if (data == "we have no labels to print") {
+      .subscribe(
+        data => {
+          
+            console.log(data);
+            this.PONumber = this.qty = data.QTY;
+            this.lines = data.Lines;
+            this.poNumber = data.PONumber;
+            this.shipMethod = data.ShipMethod;
+            this.trackingNumber = data.TrackingNO;
+            this.shippingDate = data.RequiredShipDate;
+          
+        },
 
-           console.log("No data.");
-
-        } else {
-          console.log(data);
-          this.PONumber = 
-          this.qty = data.QTY;
-          this.lines = data.Lines;
-          this.poNumber = data.PONumber;
-          this.shipMethod = data.ShipMethod;
-          this.trackingNumber = data.TrackingNO;
-          this.shippingDate = data.RequiredShipDate;
+        err => {
+          console.log("!");
+          this.item = "Error";
+          this.error = err.error;
+          
         }
-      });
+      );
   }
-
 }
