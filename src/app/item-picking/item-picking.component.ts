@@ -16,6 +16,7 @@ selection;
   shipMethod = "";
   trackingNumber = "";
   shippingDate  = "";
+  printer = "";
 
 
   constructor(
@@ -33,8 +34,9 @@ selection;
   }
 
   nextClick() {
+    console.log(this.printer);
     this.orderService
-      .getItemLabel(this.selection, this.item, "printer1")
+      .getItemLabel(this.selection, this.item, this.printer)
       .subscribe(data => {
         if (data == "we have no labels to print") {
 
