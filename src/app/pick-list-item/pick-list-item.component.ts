@@ -61,6 +61,7 @@ export class PickListItemComponent implements OnInit {
         this.loading=false;
       console.log(data);
       this.data = data;
+      this.data =this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     });
   }
 
@@ -70,6 +71,7 @@ export class PickListItemComponent implements OnInit {
               this.loading=false;
       console.log(data);
       this.data = data;
+       this.data =this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     });
   }
 
@@ -79,6 +81,7 @@ export class PickListItemComponent implements OnInit {
               this.loading=false;
       console.log(data);
       this.data = data;
+       this.data =this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     });
   }
 }
