@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { OrderService } from "../services/order.service";
+import { StateService } from "../services/state.service";
 
 @Component({
   selector: "app-item-picking",
@@ -21,7 +22,8 @@ export class ItemPickingComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private stateService: StateService
   ) {}
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class ItemPickingComponent implements OnInit {
   nextClick() {
     console.log(this.printer);
     this.orderService
-      .getItemLabel(this.selection, this.item, this.printer)
+      .getItemLabel(this.selection, this.item, this.stateService.printer)
       .subscribe(
         data => {
           
