@@ -37,7 +37,6 @@ export class QualityControlScanComponent implements OnInit {
   trackingNumber;
   shipDate;
 
-  @ViewChild("name") nameField: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -116,9 +115,15 @@ export class QualityControlScanComponent implements OnInit {
     if (licensePlateId === this.licensePlate.LicensePlateId) {
       this.getLP();
       this.showConfirmQuantityForm = true;
-      this.nameField.nativeElement.focus();
+      
     }
   }
+
+
+
+
+
+
   confirmCount(count) {
     this.error = null;
     if (count == this.licensePlate.Orders.length) {

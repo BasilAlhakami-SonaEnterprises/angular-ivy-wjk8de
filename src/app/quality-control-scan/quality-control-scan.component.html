@@ -45,7 +45,7 @@
 
       <mat-form-field *ngIf="showConfirmQuantityForm" style="width: 500px;">
              				<mat-label>how many orders in this License Plate</mat-label>
-       			<input  matInput type="number" #name  placeholder="confirm how many orders in this License Plate" value="" [(ngModel)]="count"> 
+       			<input  matInput type="number"   placeholder="confirm how many orders in this License Plate" value="" [(ngModel)]="count"> 
        
       </mat-form-field>
             	<button *ngIf="showConfirmQuantityForm"  (click)="confirmCount(count)" mat-raised-button color="primary">confirm</button>
