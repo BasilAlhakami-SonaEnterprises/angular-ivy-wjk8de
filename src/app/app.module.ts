@@ -19,6 +19,7 @@ import {QualityControlScanComponent } from './quality-control-scan/quality-contr
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogService } from './services/confirm-dialog.service';
 import { ItemPickingComponent } from './item-picking/item-picking.component';
+import { StateService } from './services/state.service';
 
 
 
@@ -31,6 +32,6 @@ import { ItemPickingComponent } from './item-picking/item-picking.component';
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
   declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ConfirmDialogComponent, ItemPickingComponent],
   bootstrap:    [ AppComponent ],
-  providers: [ OrderService, LicensePlateService, ConfirmDialogService]
+  providers: [ OrderService, LicensePlateService, ConfirmDialogService, StateService]
 })
 export class AppModule { }
