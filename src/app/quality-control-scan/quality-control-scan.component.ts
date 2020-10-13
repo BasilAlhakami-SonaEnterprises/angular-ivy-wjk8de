@@ -82,22 +82,19 @@ export class QualityControlScanComponent implements OnInit {
       this.count = null;
       console.log(scanned + "  this is a tracking number");
       this.trackingNumberLogic(scanned);
-    } else if (scanned.length === 24) {
+    }/* else if (scanned.length === 24) {
       console.log(scanned + "   this must be a license plate number");
       this.error = null;
       this.showConfirmQuantityForm = false;
       this.count = null;
       this.licensePlateLogic(scanned);
-    }
+    }*/
   }
   trackingNumberLogic(trackingNumber) {
     if (this.order == null) {
       this.getOrder(trackingNumber);
     } else if (this.order.TrackingNO === trackingNumber) {
-      this.addOrderToLicensePlate(
-        this.licensePlate.LicensePlateId,
-        this.order.PONumber
-      );
+        this.markOrderShipped(this.order.PONumber);
     } else {
       // open the dialog here
       this.trackingNumber = trackingNumber;
@@ -195,6 +192,24 @@ export class QualityControlScanComponent implements OnInit {
     );
   }
 
+  markOrderShipped(poNumber){
+       this.markingLicensePlate = true;
+       this.orderService.markOrderShipped(poNumber).subscribe(
+        data => {
+        console.log(data);
+        if (data.status == 200) {
+          this.openSnackBar("order confirmed", "dismiss");
+          this.order=null;
+        }
+       this.markingLicensePlate = false;
+        },
+         err => {
+        this.error = err.error;
+        this.markingLicensePlate = false;
+      }  
+       );
+  }
+
   emptyLicensePlate(licensePlateId) {
     this.emptyingLicnensePlate = true;
     this.licensePlateService.emptyLicensePlate(licensePlateId).subscribe(
@@ -228,9 +243,9 @@ export class QualityControlScanComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.licensePlateId = params.licensePlateId;
-    });
-    this.getLP();
+  //  this.route.queryParams.subscribe(params => {
+    //  this.licensePlateId = params.licensePlateId;
+    //});
+   // this.getLP();
   }
 }

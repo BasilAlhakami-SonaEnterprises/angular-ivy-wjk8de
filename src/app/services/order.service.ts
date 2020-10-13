@@ -23,7 +23,9 @@ export class OrderService {
       "https://directfulfillmentapi20200813154717.azurewebsites.net/api/NotNextDayShipmentsShipsAfterToday?",
 
     ByTrackingNumber:
-    "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetOrderByTrackingNumber/"
+    "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetOrderByTrackingNumber/",
+    MarkOrderShipped:
+    "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/"
   };
 
   constructor(private http: HttpClient) {}
@@ -137,6 +139,10 @@ printStoreBoxLabels(storeNumber, cartonCount, printerNumber) {
 
   }
 
+  markOrderShipped(poNumber){
+    return this.http.get(this.urls.MarkOrderShipped+poNumber,{observe : 'response'});
+  }
+   
   getByTrackingNumber(trackingNo){
     return this.http.get(this.urls.ByTrackingNumber+trackingNo);
   }
