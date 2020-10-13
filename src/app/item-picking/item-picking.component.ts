@@ -32,6 +32,7 @@ export class ItemPickingComponent implements OnInit {
       this.item = params["item"];
       console.log(this.selection);
       console.log(this.item);
+      console.log(this.stateService.printer);
     });
   }
 
@@ -41,23 +42,30 @@ export class ItemPickingComponent implements OnInit {
       .getItemLabel(this.selection, this.item, this.stateService.printer)
       .subscribe(
         data => {
-          
-            console.log(data);
-            this.PONumber = this.qty = data.QTY;
-            this.lines = data.Lines;
-            this.poNumber = data.PONumber;
-            this.shipMethod = data.ShipMethod;
-            this.trackingNumber = data.TrackingNO;
-            this.shippingDate = data.RequiredShipDate;
-          
+          console.log(data);
+          this.PONumber = this.qty = data.QTY;
+          this.lines = data.Lines;
+          this.poNumber = data.PONumber;
+          this.shipMethod = data.ShipMethod;
+          this.trackingNumber = data.TrackingNO;
+          this.shippingDate = data.RequiredShipDate;
         },
 
         err => {
           console.log("!");
+
+          //{"error":"we have no labels to print"}
+          if (err.error = "we have no labels to print")
+            this.lines = [{ Item: "Good job Monu! No more labels." }];
+          else this.lines = [{ Item: "Error" }];
           this.item = "Error";
           this.error = err.error;
-          
         }
       );
+  }
+
+  reprintClick(){
+    console.log("reprint");
+    this.orderService.reprintItemLabel(this.poNumber, this.stateService.printer).subscribe();
   }
 }

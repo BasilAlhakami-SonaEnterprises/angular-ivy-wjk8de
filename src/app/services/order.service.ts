@@ -23,14 +23,14 @@ export class OrderService {
       "https://directfulfillmentapi20200813154717.azurewebsites.net/api/NotNextDayShipmentsShipsAfterToday?",
 
     ByTrackingNumber:
-    "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetOrderByTrackingNumber/",
+      "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetOrderByTrackingNumber/",
     MarkOrderShipped:
-    "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/"
+      "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/"
   };
 
   constructor(private http: HttpClient) {}
 
-printStoreBoxLabels(storeNumber, cartonCount, printerNumber) {
+  printStoreBoxLabels(storeNumber, cartonCount, printerNumber) {
     return this.http.get(
       "https://seamzndfppremise.azurewebsites.net/api/PrintSteinmartCartonLabels/" +
         storeNumber +
@@ -112,9 +112,9 @@ printStoreBoxLabels(storeNumber, cartonCount, printerNumber) {
     return this.http.get(this.urls.ShipsLaterOtherItemList);
   }
 
-  getItemLabel(labelType, item, printer){
-
-    var url:string = "https://directfulfillmentapi20200813154717.azurewebsites.net/api/";
+  getItemLabel(labelType, item, printer) {
+    var url: string =
+      "https://directfulfillmentapi20200813154717.azurewebsites.net/api/";
 
     switch (labelType) {
       case "ShipsTodayNextDay": {
@@ -122,7 +122,7 @@ printStoreBoxLabels(storeNumber, cartonCount, printerNumber) {
         break;
       }
       case "ShipsTodayOther": {
-        url +="GetLabelsToPrintForNotNextDayShipmentsShipsTodayAndMark";
+        url += "GetLabelsToPrintForNotNextDayShipmentsShipsTodayAndMark";
         break;
       }
       case "ShipsLaterNextDay": {
@@ -132,20 +132,26 @@ printStoreBoxLabels(storeNumber, cartonCount, printerNumber) {
       case "ShipsLaterOther": {
         url += "GetLabelsToPrintForNotNextDayShipmentsShipsAfterTodayAndMark";
         break;
-      }      
+      }
     }
 
     return this.http.get(url + "/" + item + "/" + printer);
-
   }
 
-  markOrderShipped(poNumber){
-    return this.http.get(this.urls.MarkOrderShipped+poNumber,{observe : 'response'});
+  reprintItemLabel(poNumber, printer) {
+    var url: string =
+      "https://directfulfillmentapi20200813154717.azurewebsites.net/api/ReprintLabel";
+
+    return this.http.get(url + "/" + poNumber + "/" + printer);
   }
-   
-  getByTrackingNumber(trackingNo){
-    return this.http.get(this.urls.ByTrackingNumber+trackingNo);
+
+  markOrderShipped(poNumber) {
+    return this.http.get(this.urls.MarkOrderShipped + poNumber, {
+      observe: "response"
+    });
+  }
+
+  getByTrackingNumber(trackingNo) {
+    return this.http.get(this.urls.ByTrackingNumber + trackingNo);
   }
 }
-
-
