@@ -20,6 +20,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ConfirmDialogService } from './services/confirm-dialog.service';
 import { ItemPickingComponent } from './item-picking/item-picking.component';
 import { StateService } from './services/state.service';
+import { ItemInfoService } from './services/item-info.service';
+
 
 
 
@@ -32,6 +34,6 @@ import { StateService } from './services/state.service';
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
   declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ConfirmDialogComponent, ItemPickingComponent],
   bootstrap:    [ AppComponent ],
-  providers: [ OrderService, LicensePlateService, ConfirmDialogService, StateService]
+  providers: [ OrderService, LicensePlateService, ConfirmDialogService, StateService, ItemInfoService]
 })
 export class AppModule { }
