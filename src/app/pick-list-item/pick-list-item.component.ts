@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,HostListener } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { OrderService } from "../services/order.service";
+import {ItemInfoService} from "../services/item-info.service";
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-pick-list-item',
   templateUrl: './pick-list-item.component.html',
@@ -11,10 +13,14 @@ export class PickListItemComponent implements OnInit {
 
   data; // [{Code: "FS374", Qty: 13}, {Code: "DD312", Qty: 20}];
   selection;
+  error;
   loading=false;
+  scannedValue=[];
   constructor(
     private route: ActivatedRoute,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private itemService:ItemInfoService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -43,6 +49,17 @@ export class PickListItemComponent implements OnInit {
         this.loadShipsLaterOtherList();
         break;
       }
+    }
+  }
+   @HostListener("window:keypress", ["$event"]) keyEvent(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      this.error = null;
+      var scanned=this.scannedValue.join("")
+      if(scanned!=null&&scanned!='')
+      this.getScannedItem(scanned);
+      this.scannedValue = [];
+    } else {
+      this.scannedValue.push(event.key);
     }
   }
 
@@ -84,6 +101,24 @@ export class PickListItemComponent implements OnInit {
        this.data =this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     });
   }
+  
+  getScannedItem(scanned){
+     this.loading=true;
+     this.itemService.getItemInfo(scanned).subscribe(
+       data=>{
+           if (data.status == 200) {
+             console.log(data);
+                this.router.navigate(["item-picking/"+this.selection+"/"+data.body.ItemCode]);
+           }
+            this.loading=false;
+     },
+     err=>{
+           this.error = err.error;
+            this.loading=false;
+     }
+     )
+  }
+
 }
 
 class Item {
