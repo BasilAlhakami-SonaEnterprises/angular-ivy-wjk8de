@@ -18,7 +18,8 @@
 				<input matInput (keyup.enter)="licensePlateLogic(lpn)" placeholder="" value="" [(ngModel)]="lpn">
       </mat-form-field>
       <br/>
-
+        <h3 *ngIf="confirmed" style="color:green;">Confirmed!</h3>
+<br/>
       {{this.scannedValue}}
       <br/>
 

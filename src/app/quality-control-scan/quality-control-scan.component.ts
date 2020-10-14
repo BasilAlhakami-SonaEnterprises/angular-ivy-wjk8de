@@ -27,6 +27,7 @@ export class QualityControlScanComponent implements OnInit {
   scannedValue = [];
   count;
   order = null;
+  confirmed=false;
   error = null;
   gettingLicensePlate = false;
   markingLicensePlate = false;
@@ -64,6 +65,7 @@ export class QualityControlScanComponent implements OnInit {
   }
 
   @HostListener("window:keypress", ["$event"]) keyEvent(event: KeyboardEvent) {
+
     if (event.key === "Enter") {
       this.scanFilter(this.scannedValue.join(""));
       this.scannedValue = [];
@@ -72,6 +74,7 @@ export class QualityControlScanComponent implements OnInit {
     }
   }
   scanFilter(scanned) {
+        this.confirmed=false;
     if (scanned.length === 0) {
       console.log("nothing scanned");
       return;
@@ -91,9 +94,11 @@ export class QualityControlScanComponent implements OnInit {
     }*/
   }
   trackingNumberLogic(trackingNumber) {
-    if (this.order == null) {
+    this.confirmed=null;
+     this.error = null;
+  //  if (this.order == null) {
       this.getOrder(trackingNumber);
-    } else if (this.order.TrackingNO === trackingNumber) {
+  /*  } else if (this.order.TrackingNO === trackingNumber) {
         this.markOrderShipped(this.order.PONumber);
     } else {
       // open the dialog here
@@ -105,23 +110,23 @@ export class QualityControlScanComponent implements OnInit {
         cancelText: "Cancel",
         confirmText: "Yes"
       });
-    }
+    }*/
   }
 
-  licensePlateLogic(licensePlateId) {
+ /* licensePlateLogic(licensePlateId) {
     if (licensePlateId === this.licensePlate.LicensePlateId) {
       this.getLP();
       this.showConfirmQuantityForm = true;
       
     }
-  }
+  }*/
 
 
 
 
 
 
-  confirmCount(count) {
+/*  confirmCount(count) {
     this.error = null;
     if (count == this.licensePlate.Orders.length) {
       console.log("count is correct confrim");
@@ -132,9 +137,9 @@ export class QualityControlScanComponent implements OnInit {
       this.emptyLicensePlate(this.licensePlate.LicensePlateId);
     }
     this.showConfirmQuantityForm = false;
-  }
+  }*/
 
-  addOrderToLicensePlate(licensePlateNumber, poNumber) {
+ /* addOrderToLicensePlate(licensePlateNumber, poNumber) {
     this.addingOrderToLicensePlate = true;
     this.licensePlateService
       .addOrderToLicensePlate(licensePlateNumber, poNumber)
@@ -154,14 +159,16 @@ export class QualityControlScanComponent implements OnInit {
           this.addingOrderToLicensePlate = false;
         }
       );
-  }
+  }*/
   getOrder(trackingNumber) {
     this.gettingOrder = true;
+    this.confirmed=false;
     this.orderService
       .getByTrackingNumber(trackingNumber.toUpperCase())
       .subscribe(
         data => {
           this.order = data;
+          this.markOrderShipped(this.order.PONumber);
           this.gettingOrder = false;
         },
         err => {
@@ -171,7 +178,7 @@ export class QualityControlScanComponent implements OnInit {
       );
   }
 
-  markLicensePlateShipped(licensePlateId) {
+ /* markLicensePlateShipped(licensePlateId) {
     this.markingLicensePlate = true;
     this.licensePlateService.markLicensePlateShipped(licensePlateId).subscribe(
       data => {
@@ -190,7 +197,7 @@ export class QualityControlScanComponent implements OnInit {
         this.markingLicensePlate = false;
       }
     );
-  }
+  }*/
 
   markOrderShipped(poNumber){
        this.markingLicensePlate = true;
@@ -198,8 +205,8 @@ export class QualityControlScanComponent implements OnInit {
         data => {
         console.log(data);
         if (data.status == 200) {
+          this.confirmed=true;
           this.openSnackBar("order confirmed", "dismiss");
-          this.order=null;
         }
        this.markingLicensePlate = false;
         },
@@ -210,7 +217,7 @@ export class QualityControlScanComponent implements OnInit {
        );
   }
 
-  emptyLicensePlate(licensePlateId) {
+ /* emptyLicensePlate(licensePlateId) {
     this.emptyingLicnensePlate = true;
     this.licensePlateService.emptyLicensePlate(licensePlateId).subscribe(
       data => {
@@ -226,9 +233,9 @@ export class QualityControlScanComponent implements OnInit {
         this.emptyingLicnensePlate = false;
       }
     );
-  }
+  }*/
 
-  getLP() {
+ /* getLP() {
     this.gettingLicensePlate = true;
     this.licensePlateService.getLicensePlate(this.licensePlateId).subscribe(
       data => {
@@ -241,7 +248,7 @@ export class QualityControlScanComponent implements OnInit {
         this.gettingLicensePlate = false;
       }
     );
-  }
+  }*/
   ngOnInit() {
   //  this.route.queryParams.subscribe(params => {
     //  this.licensePlateId = params.licensePlateId;
