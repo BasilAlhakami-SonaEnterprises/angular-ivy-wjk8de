@@ -96,6 +96,7 @@ export class QualityControlScanComponent implements OnInit {
   trackingNumberLogic(trackingNumber) {
     this.confirmed=null;
      this.error = null;
+     this.order=null;
   //  if (this.order == null) {
       this.getOrder(trackingNumber);
   /*  } else if (this.order.TrackingNO === trackingNumber) {
