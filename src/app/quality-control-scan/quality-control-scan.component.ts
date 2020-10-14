@@ -64,15 +64,21 @@ export class QualityControlScanComponent implements OnInit {
     });
   }
 
-  @HostListener("window:keypress", ["$event"]) keyEvent(event: KeyboardEvent) {
+ @HostListener("window:keypress", ["$event"]) keyEvent(event: KeyboardEvent) {
 
-    if (event.key === "Enter") {
-      this.scanFilter(this.scannedValue.join(""));
-      this.scannedValue = [];
-    } else {
-      this.scannedValue.push(event.key);
-    }
-  }
+
+ 
+ if (event.key === "Enter") {
+ this.scanFilter(this.scannedValue.join(""));
+ this.scannedValue = [];
+ } else {
+ if (this.scannedValue.length ===0)
+ {
+ this.order = null;
+ }
+ this.scannedValue.push(event.key);
+ }
+ }
   scanFilter(scanned) {
         this.confirmed=false;
     if (scanned.length === 0) {
