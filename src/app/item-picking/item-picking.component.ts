@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { OrderService } from "../services/order.service";
 import { StateService } from "../services/state.service";
+import {Location} from '@angular/common';
 
 @Component({
   selector: "app-item-picking",
@@ -23,7 +24,8 @@ export class ItemPickingComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private orderService: OrderService,
-    private stateService: StateService
+    private stateService: StateService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -67,5 +69,9 @@ export class ItemPickingComponent implements OnInit {
   reprintClick(){
     console.log("reprint");
     this.orderService.reprintItemLabel(this.poNumber, this.stateService.printer).subscribe();
+  }
+
+   backClick() {
+    this.location.back();
   }
 }
