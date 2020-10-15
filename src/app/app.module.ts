@@ -21,6 +21,7 @@ import { ConfirmDialogService } from './services/confirm-dialog.service';
 import { ItemPickingComponent } from './item-picking/item-picking.component';
 import { StateService } from './services/state.service';
 import { ItemInfoService } from './services/item-info.service';
+import { ItemFilterPipe } from './pick-list-item/item-filter.pipe';
 
 
 
@@ -32,7 +33,7 @@ import { ItemInfoService } from './services/item-info.service';
 @NgModule({
   entryComponents:[ConfirmDialogComponent],
   imports:      [ BrowserModule, FormsModule,HttpClientModule, FlexLayoutModule, MaterialModule, BrowserAnimationsModule, AppRoutingModule ],
-  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ConfirmDialogComponent, ItemPickingComponent],
+  declarations: [ AppComponent, PickListComponent, PickListItemComponent, PrintLabelComponent, QualityControlComponent, QualityControlScanComponent,ConfirmDialogComponent, ItemPickingComponent, ItemFilterPipe],
   bootstrap:    [ AppComponent ],
   providers: [ OrderService, LicensePlateService, ConfirmDialogService, StateService, ItemInfoService]
 })
