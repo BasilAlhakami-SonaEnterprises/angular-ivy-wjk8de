@@ -13,13 +13,14 @@ export class ItemPickingComponent implements OnInit {
   selection;
   item = "Hit next to start.";
   qty = "";
-  lines = [{ Item: "Hit next to start" }];
+  lines = [{ Item: "Hit next to start", QTY : 1 }];
   poNumber = "";
   shipMethod = "";
   trackingNumber = "";
   shippingDate = "";
   printer = "";
   error = "";
+
 
   constructor(
     private route: ActivatedRoute,
