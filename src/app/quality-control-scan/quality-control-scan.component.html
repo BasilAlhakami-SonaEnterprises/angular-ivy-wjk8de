@@ -27,10 +27,21 @@
           <b *ngIf="order!=null">{{order.PONumber}}</b><br/><br/>
        <mat-spinner *ngIf="gettingOrder"  diameter="30" ></mat-spinner>
        <div *ngIf="order!=null">
-        <div  *ngFor='let line of order.Lines;'>
-      <h1>  {{line.Item}} &nbsp; &nbsp;&nbsp; {{line.QTY}}</h1>  <h1></h1>
-  
-         </div>
+
+
+<div fxLayout='row' fxLayoutAlign="start center" style="" *ngFor="let line of order.Lines"
+	style=" padding:6%; background-color: black; color: white;" class="mat-display-3">
+	 <div fxFlex="auto">{{line.Item}}</div>
+	<div fxFlex="auto" style=" text-align:right;">
+		<button mat-fab class="mat-display-3" [color]="line.QTY > 1 ?  'warn' : 'primary' " >{{line.QTY}} </button>
+	</div> 
+
+ <!--<line-item [line]="line"></line-item>-->
+
+</div>
+
+
+         
          </div>
 
          <div *ngIf="order!=null">{{order.RequiredShipDate}}</div>
