@@ -10,6 +10,6 @@ export class ItemFilterPipe implements PipeTransform {
     }
     // filter items array, items which match and return true will be
     // kept, false will be filtered out
-    return dataItems.filter(dataItem => dataItem.Item.indexOf(filter) !== -1);
+    return dataItems.filter(dataItem => dataItem.Item.indexOf(filter.toUpperCase()) !== -1);
   }
 }
