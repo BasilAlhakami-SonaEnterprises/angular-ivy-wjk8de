@@ -25,7 +25,8 @@ export class OrderService {
     ByTrackingNumber:
       "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetOrderByTrackingNumber/",
     MarkOrderShipped:
-      "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/"
+      "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/",
+    GetItemLocation : "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemLocation/"
   };
 
   constructor(private http: HttpClient) {}
@@ -153,5 +154,9 @@ export class OrderService {
 
   getByTrackingNumber(trackingNo) {
     return this.http.get(this.urls.ByTrackingNumber + trackingNo);
+  }
+
+  getItemLocation(item, qty){
+    return this.http.get(this.urls.GetItemLocation + item + "/" + qty);
   }
 }
