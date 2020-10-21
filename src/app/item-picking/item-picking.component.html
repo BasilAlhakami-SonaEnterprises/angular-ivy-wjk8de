@@ -1,6 +1,6 @@
 <div fxLayout='row' fxLayoutAlign="start center" style="" *ngFor="let line of lines"
 	style=" padding:6%; background-color: black; color: white;" class="mat-display-3">
-	 <div fxFlex="auto">{{line.Item}}</div>
+	 <div fxFlex="auto">{{line.Item}} <br/> {{line.Location}}</div>
 	<div fxFlex="auto" style=" text-align:right;">
 		<button mat-fab class="mat-display-3" [color]="line.QTY > 1 ?  'warn' : 'primary' " >{{line.QTY}} </button>
 	</div> 
@@ -49,6 +49,7 @@
 				<mat-option value="printer2">2</mat-option>
 				<mat-option value="printer3">3</mat-option>
 				<mat-option value="printer4">4</mat-option>
+        <mat-option value="printer5">5</mat-option>
 			</mat-select>
 		</mat-form-field>
 

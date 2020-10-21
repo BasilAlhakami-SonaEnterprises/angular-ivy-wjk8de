@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { OrderService } from "../services/order.service";
 import { StateService } from "../services/state.service";
-import {Location} from '@angular/common';
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-item-picking",
@@ -13,14 +13,13 @@ export class ItemPickingComponent implements OnInit {
   selection;
   item = "Hit next to start.";
   qty = "";
-  lines = [{ Item: "Hit next to start", QTY : 1 }];
+  lines = [{ Item: "Hit next to start", QTY: 1, Location: "" }];
   poNumber = "";
   shipMethod = "";
   trackingNumber = "";
   shippingDate = "";
   printer = "";
   error = "";
-
 
   constructor(
     private route: ActivatedRoute,
@@ -46,33 +45,53 @@ export class ItemPickingComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.PONumber = this.qty = data.QTY;
           this.lines = data.Lines;
           this.poNumber = data.PONumber;
           this.shipMethod = data.ShipMethod;
           this.trackingNumber = data.TrackingNO;
           this.shippingDate = data.RequiredShipDate;
+          this.getLocation();
         },
 
         err => {
           console.log("!");
 
           //{"error":"we have no labels to print"}
-          if (err.error = "we have no labels to print")
+          if ((err.error = "we have no labels to print"))
             this.lines = [{ Item: "Good job Monu! No more labels." }];
           else this.lines = [{ Item: "Error" }];
           this.item = "Error";
           this.error = err.error;
         }
+
       );
+
+      
   }
 
-  reprintClick(){
+  reprintClick() {
     console.log("reprint");
-    this.orderService.reprintItemLabel(this.poNumber, this.stateService.printer).subscribe();
+    this.orderService
+      .reprintItemLabel(this.poNumber, this.stateService.printer)
+      .subscribe();
   }
 
-   backClick() {
+  backClick() {
     this.location.back();
+  }
+
+  getLocation() {
+    this.lines.forEach((value) => {
+      console.log(value.Item + " " + value.QTY);
+      this.orderService.getItemLocation(value.Item, value.QTY).subscribe(
+        data => {
+          console.log(data);
+          value.Location = data.binNumber;
+        },
+        err => {
+          console.log("!");
+        }
+      );
+    });
   }
 }
