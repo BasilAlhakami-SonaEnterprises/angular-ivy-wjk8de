@@ -3,23 +3,30 @@
 </div>
 <mat-form-field style="padding-left: 16px;">
 	<mat-label>Item to Seach</mat-label>
-	<input matInput  placeholder="" value="" [(ngModel)]="filterArgs">
-	
+	<input matInput  placeholder="" value="" [(ngModel)]="filterArgs"/>
 </mat-form-field>
 
-<span style="padding-left: 16px;">
+	<span style="padding-left: 16px;">
 <button  mat-fab color="primary" *ngIf="filterArgs"  (click)="filterArgs=''">
     <mat-icon>close</mat-icon>
 </button>
 </span>
 
+	<span style="padding-left: 16px;">
+<button  mat-raised-button color="primary" (click)="SortByBinClick()">
+    Sort By Bin
+</button>
+</span>
 
-<mat-spinner *ngIf="loading" diameter="30"></mat-spinner>
-<mat-nav-list>
-	<mat-list-item *ngFor="let link of data | itemFilter: filterArgs ">
-		<a matLine routerLink="/item-picking/{{selection}}/{{link.Item}}" routerLinkActive="active">{{ link.Item }}</a>
-		<button mat-icon-button>
+
+	<mat-spinner *ngIf="loading" diameter="30"></mat-spinner>
+	<mat-nav-list>
+		<mat-list-item *ngFor="let link of data | itemFilter: filterArgs ">
+			<a matLine routerLink="/item-picking/{{selection}}/{{link.Item}}"
+				routerLinkActive="active">{{ link.Item }}</a>
+			<button mat-raised-button color="warn">{{link.Location}}</button>
+			<button mat-icon-button>
         {{link.QTY}}
      </button>
-	</mat-list-item>
-</mat-nav-list>
+		</mat-list-item>
+	</mat-nav-list>

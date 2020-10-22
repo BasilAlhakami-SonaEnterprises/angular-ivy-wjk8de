@@ -68,6 +68,7 @@ export class PickListItemComponent implements OnInit {
     this.orderService.getShipsTodayNextDayItemList().subscribe(data => {
       this.loading = false;
       console.log(data);
+      this.getLocation();
       this.data = data;
     });
   }
@@ -78,6 +79,7 @@ export class PickListItemComponent implements OnInit {
       this.loading = false;
       console.log(data);
       this.data = data;
+    this.getLocation();
       this.data = this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     });
   }
@@ -88,6 +90,7 @@ export class PickListItemComponent implements OnInit {
       this.loading = false;
       console.log(data);
       this.data = data;
+      this.getLocation();
       this.data = this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     });
   }
@@ -98,6 +101,7 @@ export class PickListItemComponent implements OnInit {
       this.loading = false;
       console.log(data);
       this.data = data;
+      this.getLocation();
       this.data = this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     });
   }
@@ -120,6 +124,30 @@ export class PickListItemComponent implements OnInit {
       }
     );
   }
+
+  getLocation() {
+    this.data.forEach((value) => {
+      console.log(value.Item + " " + value.QTY);
+      this.orderService.getItemLocation(value.Item, value.QTY).subscribe(
+        dat => {
+          console.log(dat);
+          value.Location = dat.binNumber;
+        },
+        err => {
+          console.log("!");
+          value.Location = "";
+        }
+      );
+    });
+  }
+
+  SortByBinClick()
+  {
+    
+    this.data = this.data.sort((a, b) => (a.Location > b.Location ? -1 : 1));
+    console.log(this.data);
+  }
+
 }
 
 class Item {
