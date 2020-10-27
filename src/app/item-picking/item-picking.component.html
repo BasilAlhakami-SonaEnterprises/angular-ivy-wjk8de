@@ -1,74 +1,84 @@
 <div fxLayout='row' fxLayoutAlign="start center" style="" *ngFor="let line of lines"
 	style=" padding:6%; background-color: black; color: white;" class="mat-display-3">
-	 <div fxFlex="auto">{{line.Item}} <br/> {{line.Location}}</div>
-	<div fxFlex="auto" style=" text-align:right;">
-		<button mat-fab class="mat-display-3" [color]="line.QTY > 1 ?  'warn' : 'primary' " >{{line.QTY}} </button>
-	</div> 
+	<div fxFlex="auto">{{line.Item}} <br/> {{line.Location}}</div>
+		<div fxFlex="auto" style=" text-align:right;">
+			<button mat-fab class="mat-display-3" [color]="line.QTY > 1 ?  'warn' : 'primary' " >{{line.QTY}} </button>
+		</div>
 
- <!--<line-item [line]="line"></line-item>-->
-
-</div>
-
-  <div>
- 
-  </div>
-
-<div fxLayout='row'>
-	<div fxFlex="auto" style="padding-left:6%;">PO: {{poNumber}}</div>
-</div>
-
-<div fxLayout='row'>
-	<div fxFlex="auto" style="padding-left:6%;">Ship Method: {{shipMethod}}</div>
-</div>
-
-<div fxLayout='row'>
-	<div fxFlex="auto" style="padding-left:6%;">Tracking Number: {{trackingNumber}}</div>
-</div>
-
-<div fxLayout='row'>
-	<div fxFlex="auto" style="padding-left:6%;">Shipping Date: {{shippingDate}}</div>
-</div>
-
-<div fxLayout='row' style="margin-top: 20px;">
-	<div fxFlex="auto" style="padding-left:6%;">
-		<button mat-raised-button color="primary" style="width:10em; height:5em; " class = "mat-display-3" (click)="nextClick()"> Next </button>
-	</div>
-	<div fxFlex="auto" style="padding-left:6%;">
-		<button mat-raised-button color="primary" class = "mat-display-3" (click)="reprintClick()"> Reprint </button>
-	</div>
-</div>
-
-
-<div fxLayout='row' style="margin-top: 20px;">
-	<div fxFlex="auto" style="padding-left:6%;">
-
-		<mat-form-field appearance="fill">
-			<mat-label>Printer</mat-label>
-			<mat-select matNativeControl [(value)]="stateService.printer">
-				<mat-option value="printer1">1</mat-option>
-				<mat-option value="printer2">2</mat-option>
-				<mat-option value="printer3">3</mat-option>
-				<mat-option value="printer4">4</mat-option>
-        <mat-option value="printer5">5</mat-option>
-			</mat-select>
-		</mat-form-field>
-
-
-
-
+		<!--<line-item [line]="line"></line-item>-->
 
 	</div>
 
-</div>
-
-<div fxLayout='row' style="margin-top: 20px;">
-	<div fxFlex="auto" style="padding-left:6%;">
-
-		<button mat-raised-button color="primary" class = "mat-display-3" (click)="backClick()"> Back </button>
-
-
-
+	<div>
 
 	</div>
 
-</div>
+	<div fxLayout='row'>
+		<div fxFlex="auto" style="padding-left:6%;">PO: {{poNumber}}</div>
+	</div>
+
+	<div fxLayout='row'>
+		<div fxFlex="auto" style="padding-left:6%;">Ship Method: {{shipMethod}}</div>
+	</div>
+
+	<div fxLayout='row'>
+		<div fxFlex="auto" style="padding-left:6%;">Tracking Number: {{trackingNumber}}</div>
+	</div>
+
+	<div fxLayout='row'>
+		<div fxFlex="auto" style="padding-left:6%;">Shipping Date: {{shippingDate}}</div>
+	</div>
+
+	<div fxLayout='row' style="margin-top: 20px;" *ngIf="loading; else buttonElse">
+		<div fxFlex="auto" style="padding-left:6%;">
+			<mat-spinner></mat-spinner>
+		</div>
+	</div>
+
+	<ng-template #buttonElse>
+		<div fxLayout='row' style="margin-top: 20px;">
+			<div fxFlex="auto" style="padding-left:6%;">
+				<button mat-raised-button color="primary" style="width:10em; height:5em; " class = "mat-display-3" (click)="nextClick()"> Next </button>
+			</div>
+			<div fxFlex="auto" style="padding-left:6%;">
+				<button mat-raised-button color="primary" class = "mat-display-3" (click)="reprintClick()"> Reprint </button>
+			</div>
+		</div>
+	</ng-template>
+
+
+
+
+	<div fxLayout='row' style="margin-top: 20px;">
+		<div fxFlex="auto" style="padding-left:6%;">
+
+			<mat-form-field appearance="fill">
+				<mat-label>Printer</mat-label>
+				<mat-select matNativeControl [(value)]="stateService.printer">
+					<mat-option value="printer1">1</mat-option>
+					<mat-option value="printer2">2</mat-option>
+					<mat-option value="printer3">3</mat-option>
+					<mat-option value="printer4">4</mat-option>
+					<mat-option value="printer5">5</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+
+
+
+
+		</div>
+
+	</div>
+
+	<div fxLayout='row' style="margin-top: 20px;">
+		<div fxFlex="auto" style="padding-left:6%;">
+
+			<button mat-raised-button color="primary" class = "mat-display-3" (click)="backClick()"> Back </button>
+
+
+
+
+		</div>
+
+	</div>

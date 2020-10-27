@@ -20,6 +20,7 @@ export class ItemPickingComponent implements OnInit {
   shippingDate = "";
   printer = "";
   error = "";
+  loading : boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +41,7 @@ export class ItemPickingComponent implements OnInit {
 
   nextClick() {
     console.log(this.printer);
+    this.loading = true;
     this.orderService
       .getItemLabel(this.selection, this.item, this.stateService.printer)
       .subscribe(
@@ -51,6 +53,7 @@ export class ItemPickingComponent implements OnInit {
           this.trackingNumber = data.TrackingNO;
           this.shippingDate = data.RequiredShipDate;
           this.getLocation();
+          this.loading = false;
         },
 
         err => {
@@ -62,6 +65,7 @@ export class ItemPickingComponent implements OnInit {
           else this.lines = [{ Item: "Error" }];
           this.item = "Error";
           this.error = err.error;
+          this.loading = false;
         }
 
       );
