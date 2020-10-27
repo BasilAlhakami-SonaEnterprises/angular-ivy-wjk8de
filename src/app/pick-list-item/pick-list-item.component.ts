@@ -133,19 +133,22 @@ export class PickListItemComponent implements OnInit {
         err => {
           //console.log("!");
           value.Location = "";
+        },
+        ()=>{
+           this.data = this.data.sort((a, b) => (a.Location > b.Location ? -1 : 1));
         }
       );
     });
 
-    setTimeout(() => {
-      this.data = this.data.sort((a, b) => (a.Location > b.Location ? -1 : 1));
-    }, 5000);
+    // setTimeout(() => {
+    //   this.data = this.data.sort((a, b) => (a.Location > b.Location ? -1 : 1));
+    // }, 1000);
   }
 
 
 
   SortByBinClick() {
-    
+    this.data = this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
     //console.log(this.data);
   }
 }
