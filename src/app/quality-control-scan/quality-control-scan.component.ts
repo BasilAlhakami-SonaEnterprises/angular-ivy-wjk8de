@@ -87,7 +87,7 @@ export class QualityControlScanComponent implements OnInit {
       console.log(scanned + "  this is a tracking number");
 
 
-      if (scanned.length > 18){
+      if (scanned.length > 19){
         scanned = scanned.substr(8);
       }
 
