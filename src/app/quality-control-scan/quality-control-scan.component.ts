@@ -27,7 +27,7 @@ export class QualityControlScanComponent implements OnInit {
   scannedValue = [];
   count;
   order = null;
-  confirmed=false;
+  confirmed = false;
   error = null;
   gettingLicensePlate = false;
   markingLicensePlate = false;
@@ -37,7 +37,6 @@ export class QualityControlScanComponent implements OnInit {
   emptyingLicnensePlate = false;
   trackingNumber;
   shipDate;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -64,48 +63,38 @@ export class QualityControlScanComponent implements OnInit {
     });
   }
 
- @HostListener("window:keypress", ["$event"]) keyEvent(event: KeyboardEvent) {
+  @HostListener("window:keypress", ["$event"]) keyEvent(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      this.scanFilter(this.scannedValue.join(""));
+      this.scannedValue = [];
+    } else {
+      if (this.scannedValue.length === 0) {
+        this.order = null;
+      }
+      this.scannedValue.push(event.key);
+    }
+  }
 
-
- 
- if (event.key === "Enter") {
- this.scanFilter(this.scannedValue.join(""));
- this.scannedValue = [];
- } else {
- if (this.scannedValue.length ===0)
- {
- this.order = null;
- }
- this.scannedValue.push(event.key);
- }
- }
   scanFilter(scanned) {
-        this.confirmed=false;
+    this.confirmed = false;
     if (scanned.length === 0) {
       console.log("nothing scanned");
       return;
     }
-    if (scanned.length === 18 && scanned[0] == "1" && scanned[1] == "Z") {
       this.error = null;
       this.showConfirmQuantityForm = false;
       this.count = null;
       console.log(scanned + "  this is a tracking number");
       this.trackingNumberLogic(scanned);
-    }/* else if (scanned.length === 24) {
-      console.log(scanned + "   this must be a license plate number");
-      this.error = null;
-      this.showConfirmQuantityForm = false;
-      this.count = null;
-      this.licensePlateLogic(scanned);
-    }*/
+ 
   }
   trackingNumberLogic(trackingNumber) {
-    this.confirmed=null;
-     this.error = null;
-     this.order=null;
-  //  if (this.order == null) {
-      this.getOrder(trackingNumber);
-  /*  } else if (this.order.TrackingNO === trackingNumber) {
+    this.confirmed = null;
+    this.error = null;
+    this.order = null;
+    //  if (this.order == null) {
+    this.getOrder(trackingNumber);
+    /*  } else if (this.order.TrackingNO === trackingNumber) {
         this.markOrderShipped(this.order.PONumber);
     } else {
       // open the dialog here
@@ -120,7 +109,7 @@ export class QualityControlScanComponent implements OnInit {
     }*/
   }
 
- /* licensePlateLogic(licensePlateId) {
+  /* licensePlateLogic(licensePlateId) {
     if (licensePlateId === this.licensePlate.LicensePlateId) {
       this.getLP();
       this.showConfirmQuantityForm = true;
@@ -128,12 +117,7 @@ export class QualityControlScanComponent implements OnInit {
     }
   }*/
 
-
-
-
-
-
-/*  confirmCount(count) {
+  /*  confirmCount(count) {
     this.error = null;
     if (count == this.licensePlate.Orders.length) {
       console.log("count is correct confrim");
@@ -146,7 +130,7 @@ export class QualityControlScanComponent implements OnInit {
     this.showConfirmQuantityForm = false;
   }*/
 
- /* addOrderToLicensePlate(licensePlateNumber, poNumber) {
+  /* addOrderToLicensePlate(licensePlateNumber, poNumber) {
     this.addingOrderToLicensePlate = true;
     this.licensePlateService
       .addOrderToLicensePlate(licensePlateNumber, poNumber)
@@ -169,7 +153,7 @@ export class QualityControlScanComponent implements OnInit {
   }*/
   getOrder(trackingNumber) {
     this.gettingOrder = true;
-    this.confirmed=false;
+    this.confirmed = false;
     this.orderService
       .getByTrackingNumber(trackingNumber.toUpperCase())
       .subscribe(
@@ -185,7 +169,7 @@ export class QualityControlScanComponent implements OnInit {
       );
   }
 
- /* markLicensePlateShipped(licensePlateId) {
+  /* markLicensePlateShipped(licensePlateId) {
     this.markingLicensePlate = true;
     this.licensePlateService.markLicensePlateShipped(licensePlateId).subscribe(
       data => {
@@ -206,25 +190,25 @@ export class QualityControlScanComponent implements OnInit {
     );
   }*/
 
-  markOrderShipped(poNumber){
-       this.markingLicensePlate = true;
-       this.orderService.markOrderShipped(poNumber).subscribe(
-        data => {
+  markOrderShipped(poNumber) {
+    this.markingLicensePlate = true;
+    this.orderService.markOrderShipped(poNumber).subscribe(
+      data => {
         console.log(data);
         if (data.status == 200) {
-          this.confirmed=true;
+          this.confirmed = true;
           this.openSnackBar("order confirmed", "dismiss");
         }
-       this.markingLicensePlate = false;
-        },
-         err => {
+        this.markingLicensePlate = false;
+      },
+      err => {
         this.error = err.error;
         this.markingLicensePlate = false;
-      }  
-       );
+      }
+    );
   }
 
- /* emptyLicensePlate(licensePlateId) {
+  /* emptyLicensePlate(licensePlateId) {
     this.emptyingLicnensePlate = true;
     this.licensePlateService.emptyLicensePlate(licensePlateId).subscribe(
       data => {
@@ -242,7 +226,7 @@ export class QualityControlScanComponent implements OnInit {
     );
   }*/
 
- /* getLP() {
+  /* getLP() {
     this.gettingLicensePlate = true;
     this.licensePlateService.getLicensePlate(this.licensePlateId).subscribe(
       data => {
@@ -257,9 +241,9 @@ export class QualityControlScanComponent implements OnInit {
     );
   }*/
   ngOnInit() {
-  //  this.route.queryParams.subscribe(params => {
+    //  this.route.queryParams.subscribe(params => {
     //  this.licensePlateId = params.licensePlateId;
     //});
-   // this.getLP();
+    // this.getLP();
   }
 }
