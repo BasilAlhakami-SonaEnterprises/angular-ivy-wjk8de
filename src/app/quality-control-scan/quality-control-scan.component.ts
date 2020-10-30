@@ -85,6 +85,13 @@ export class QualityControlScanComponent implements OnInit {
       this.showConfirmQuantityForm = false;
       this.count = null;
       console.log(scanned + "  this is a tracking number");
+
+
+      if (scanned.length > 18){
+        scanned = scanned.substr(8);
+      }
+
+
       this.trackingNumberLogic(scanned);
  
   }
@@ -92,21 +99,10 @@ export class QualityControlScanComponent implements OnInit {
     this.confirmed = null;
     this.error = null;
     this.order = null;
-    //  if (this.order == null) {
+
+
     this.getOrder(trackingNumber);
-    /*  } else if (this.order.TrackingNO === trackingNumber) {
-        this.markOrderShipped(this.order.PONumber);
-    } else {
-      // open the dialog here
-      this.trackingNumber = trackingNumber;
-      this.openconfirmDialog({
-        title: "You scanned another Tracking Number",
-        message:
-          "You scanned another tracking number while the current one wasn't dealt with yet, are you sure you want to switch to what you just scanned?",
-        cancelText: "Cancel",
-        confirmText: "Yes"
-      });
-    }*/
+
   }
 
   /* licensePlateLogic(licensePlateId) {
