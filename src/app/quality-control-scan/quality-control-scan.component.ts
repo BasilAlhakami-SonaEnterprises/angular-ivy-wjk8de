@@ -88,7 +88,8 @@ export class QualityControlScanComponent implements OnInit {
 
 
       if (scanned.length > 19){
-        scanned = scanned.substr(8);
+        scanned = scanned.substr(9);
+        console.log("T:" + scanned);
       }
 
 
