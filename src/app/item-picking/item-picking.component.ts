@@ -40,6 +40,13 @@ export class ItemPickingComponent implements OnInit {
   }
 
   nextClick() {
+    //this.loading=true;
+    //this.orderService
+   // .pickItem
+      
+  }
+
+  getItemLabel(){
     console.log(this.printer);
     this.loading = true;
     // for testing remove the printer number to avoid printing 
@@ -72,7 +79,6 @@ export class ItemPickingComponent implements OnInit {
 
       );
 
-      
   }
 
   reprintClick() {
