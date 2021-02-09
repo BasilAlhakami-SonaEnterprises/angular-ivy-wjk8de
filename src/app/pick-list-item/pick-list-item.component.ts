@@ -69,7 +69,7 @@ export class PickListItemComponent implements OnInit {
       this.loading = false;
       console.log(data);
       this.data = data;
-      this.getLocation();
+      this.getPickLocation();
     });
   }
 
@@ -79,7 +79,7 @@ export class PickListItemComponent implements OnInit {
       this.loading = false;
       console.log(data);
       this.data = data;
-      this.getLocation();
+      this.getPickLocation();
     });
   }
 
@@ -89,7 +89,7 @@ export class PickListItemComponent implements OnInit {
       this.loading = false;
       console.log(data);
       this.data = data;
-      this.getLocation();
+      this.getPickLocation();
     });
   }
 
@@ -99,7 +99,7 @@ export class PickListItemComponent implements OnInit {
       this.loading = false;
       console.log(data);
       this.data = data;
-      this.getLocation();
+      this.getPickLocation();
     });
   }
 
@@ -121,6 +121,26 @@ export class PickListItemComponent implements OnInit {
       }
     );
   }
+  
+  getPickLocation(){
+    this.data.forEach(value=>{
+      console.log(value.Item+" "+value.QTY+" "+value.BatchId);
+      this.orderService.getItemPickLocation(value.Item,value.QTY,value.BatchId).subscribe(
+        dat=>{
+          value.Location=dat.binNumber;
+        },
+         err => {
+          //console.log("!");
+          value.Location = "";
+        },
+        () => {
+          this.data = this.data.sort((a, b) =>
+            a.Location > b.Location ? -1 : 1
+          );
+        }
+      );
+    });
+  }
 
   getLocation() {
     this.data.forEach(value => {
@@ -134,8 +154,10 @@ export class PickListItemComponent implements OnInit {
           //console.log("!");
           value.Location = "";
         },
-        ()=>{
-           this.data = this.data.sort((a, b) => (a.Location > b.Location ? -1 : 1));
+        () => {
+          this.data = this.data.sort((a, b) =>
+            a.Location > b.Location ? -1 : 1
+          );
         }
       );
     });
@@ -144,8 +166,6 @@ export class PickListItemComponent implements OnInit {
     //   this.data = this.data.sort((a, b) => (a.Location > b.Location ? -1 : 1));
     // }, 1000);
   }
-
-
 
   SortByBinClick() {
     this.data = this.data.sort((a, b) => (a.Item < b.Item ? -1 : 1));
