@@ -124,13 +124,15 @@ export class PickListItemComponent implements OnInit {
   
   getPickLocation(){
     this.data.forEach(value=>{
-      console.log(value.Item+" "+value.QTY+" "+value.BatchId);
+  //  console.log(value.Item+" "+value.QTY+" "+value.BatchId);
       this.orderService.getItemPickLocation(value.Item,value.QTY,value.BatchId).subscribe(
         dat=>{
+      //    console.log(dat);
           value.Location=dat.binNumber;
         },
          err => {
           //console.log("!");
+          console.log(err);
           value.Location = "";
         },
         () => {

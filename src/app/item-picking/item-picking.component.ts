@@ -42,8 +42,10 @@ export class ItemPickingComponent implements OnInit {
   nextClick() {
     console.log(this.printer);
     this.loading = true;
+    // for testing remove the printer number to avoid printing 
+    //this.stateService.printer
     this.orderService
-      .getItemLabel(this.selection, this.item, this.stateService.printer)
+      .getItemLabel(this.selection, this.item,"")
       .subscribe(
         data => {
           console.log(data);
