@@ -27,7 +27,8 @@ export class OrderService {
     MarkOrderShipped:
       "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/",
     GetItemLocation : "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemLocation/",
-    GetItemPickLocation:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemPickLocation/"
+    GetItemPickLocation:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemPickLocation/",
+    PickItem:"https://wms-services20210209153921.azurewebsites.net/api/PickItem/"
   };
 
   constructor(private http: HttpClient) {}
@@ -150,6 +151,12 @@ export class OrderService {
   markOrderShipped(poNumber) {
     return this.http.get(this.urls.MarkOrderShipped + poNumber, {
       observe: "response"
+    });
+  }
+
+  pickItem(id,qty,batchId){
+     return this.http.get(this.urls.PickItem+id+"/"+qty+"/"+batchId,{
+         observe:"response"
     });
   }
 
