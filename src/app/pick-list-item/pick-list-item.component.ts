@@ -132,8 +132,10 @@ export class PickListItemComponent implements OnInit {
         },
          err => {
           //console.log("!");
-          console.log(err);
-          value.Location = "";
+          value.Item="";
+          value.Location = "Not Aloocated Please Allocate";
+          value.QTY="";
+
         },
         () => {
           this.data = this.data.sort((a, b) =>
