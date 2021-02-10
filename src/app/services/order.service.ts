@@ -121,24 +121,24 @@ export class OrderService {
 
     switch (labelType) {
       case "ShipsTodayNextDay": {
-        url += "GetLabelsToPrintForNextDayShipmentsShipsTodayAndMark";
+        url += "GetLabelsToPrintForNextDayShipmentsShipsToday";
         break;
       }
       case "ShipsTodayOther": {
-        url += "GetLabelsToPrintForNotNextDayShipmentsShipsTodayAndMark";
+        url += "GetLabelsToPrintForNotNextDayShipmentsShipsToday";
         break;
       }
       case "ShipsLaterNextDay": {
-        url += "GetLabelsToPrintForNextDayShipmentsShipsAfterTodayAndMark";
+        url += "GetLabelsToPrintForNextDayShipmentsShipsAfterToday";
         break;
       }
       case "ShipsLaterOther": {
-        url += "GetLabelsToPrintForNotNextDayShipmentsShipsAfterTodayAndMark";
+        url += "GetLabelsToPrintForNotNextDayShipmentsShipsAfterToday";
         break;
       }
     }
 
-    return this.http.get(url + "/" + item + "/" + printer);
+    return this.http.get(url + "/" + item);
   }
 
   reprintItemLabel(poNumber, printer) {
