@@ -63,6 +63,7 @@ export class ItemPickingComponent implements OnInit {
           this.trackingNumber = data.TrackingNO;
           this.shippingDate = data.RequiredShipDate;
           this.batchId=data.BatchId;
+          this.getPickLocation();
           //this.getPickLocationAndPick();
           this.loading = false;
         },
@@ -95,12 +96,35 @@ export class ItemPickingComponent implements OnInit {
     this.location.back();
   }
 
+
+    getPickLocation(){
+    this.lines.forEach(value=>{
+  //  console.log(value.Item+" "+value.QTY+" "+value.BatchId);
+      this.orderService.getItemPickLocation(value.Item,value.QTY,this.batchId).subscribe(
+        dat=>{
+          console.log(dat);
+          value.Location=dat.binNumber;
+        },
+         err => {
+            console.log(err);
+          //console.log("!");
+         // value.Item="";
+          //value.Location = "Not Aloocated Please Allocate";
+          //value.QTY="";
+
+        }
+       
+      );
+    });
+  }
+
   getLocation() {
     this.lines.forEach((value) => {
       console.log(value.Item + " " + value.QTY);
       this.orderService.getItemLocation(value.Item, value.QTY).subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
+          
           value.Location = data.binNumber;
         },
         err => {
