@@ -18,6 +18,7 @@ export class ItemPickingComponent implements OnInit {
   shipMethod = "";
   trackingNumber = "";
   shippingDate = "";
+  batchId="";
   printer = "";
   error = "";
   loading : boolean = false;
@@ -40,19 +41,19 @@ export class ItemPickingComponent implements OnInit {
   }
 
   nextClick() {
-    //this.loading=true;
+   // this.loading=true;
     //this.orderService
    // .pickItem
+     this.getItemLabel();
       
   }
 
   getItemLabel(){
-    console.log(this.printer);
     this.loading = true;
     // for testing remove the printer number to avoid printing 
     //this.stateService.printer
     this.orderService
-      .getItemLabel(this.selection, this.item,"")
+      .getItemLabel(this.selection,this.item,this.stateService.printer)
       .subscribe(
         data => {
           console.log(data);
@@ -61,7 +62,8 @@ export class ItemPickingComponent implements OnInit {
           this.shipMethod = data.ShipMethod;
           this.trackingNumber = data.TrackingNO;
           this.shippingDate = data.RequiredShipDate;
-          this.getLocation();
+          this.batchId=data.BatchId;
+          //this.getPickLocationAndPick();
           this.loading = false;
         },
 
@@ -69,6 +71,7 @@ export class ItemPickingComponent implements OnInit {
           console.log("!");
 
           //{"error":"we have no labels to print"}
+          console.log(err);
           if ((err.error = "we have no labels to print"))
             this.lines = [{ Item: "Good job Monu! No more labels." }];
           else this.lines = [{ Item: "Error" }];
