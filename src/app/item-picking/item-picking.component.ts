@@ -160,6 +160,7 @@ export class ItemPickingComponent implements OnInit {
         this.loading=false;
       },
       err=>{
+         console.log(err);
          this.loading=false;
       }
     )
