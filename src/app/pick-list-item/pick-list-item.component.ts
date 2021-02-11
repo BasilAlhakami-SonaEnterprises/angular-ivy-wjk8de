@@ -132,9 +132,9 @@ export class PickListItemComponent implements OnInit {
         },
          err => {
           //console.log("!");
-          value.Item="";
-          value.Location = "Not Aloocated Please Allocate";
-          value.QTY="";
+        
+          value.Location = value.Item+"  Not Aloocated Please Allocate";
+            value.Item="";
 
         },
         () => {

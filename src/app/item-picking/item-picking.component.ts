@@ -18,6 +18,8 @@ export class ItemPickingComponent implements OnInit {
   shipMethod = "";
   trackingNumber = "";
   shippingDate = "";
+  pickSuccess=false
+  id="";
   batchId="";
   printer = "";
   error = "";
@@ -44,6 +46,7 @@ export class ItemPickingComponent implements OnInit {
    // this.loading=true;
     //this.orderService
    // .pickItem
+     this.pickSuccess=false;
      this.getItemLabel();
       
   }
@@ -63,6 +66,7 @@ export class ItemPickingComponent implements OnInit {
           this.trackingNumber = data.TrackingNO;
           this.shippingDate = data.RequiredShipDate;
           this.batchId=data.BatchId;
+          this.id=data.id;
           this.getPickLocation();
           //this.getPickLocationAndPick();
          // this.loading = false;
@@ -100,11 +104,12 @@ export class ItemPickingComponent implements OnInit {
     getPickLocation(){
       this.loading=true;
     this.lines.forEach(value=>{
-  //  console.log(value.Item+" "+value.QTY+" "+value.BatchId);
+    console.log(value.Item+" "+value.QTY+" "+value.BatchId);
       this.orderService.getItemPickLocation(value.Item,value.QTY,this.batchId).subscribe(
         dat=>{
           value.Location=dat.binNumber;
-          //pickItem();
+
+          this.pickItem(value,dat.docId,value.QTY,this.batchId);
         },
          err => {
           value.Location = "Not Alocated Please Allocate";
@@ -115,7 +120,7 @@ export class ItemPickingComponent implements OnInit {
     });
   }
 
-  getLocation() {
+  /*getLocation() {
     this.lines.forEach((value) => {
       console.log(value.Item + " " + value.QTY);
       this.orderService.getItemLocation(value.Item, value.QTY).subscribe(
@@ -129,18 +134,33 @@ export class ItemPickingComponent implements OnInit {
         }
       );
     });
-  }
+  }*/
 
-  pickItem(id:string,qty,batchId:string){
+  pickItem(item,id:string,qty,batchId:string){
     this.loading=true;
     this.orderService.pickItem(id,qty,batchId).subscribe(
       data=>
       {
-          
+         this.pickSuccess=true;
+          this.printLabelAndMark();
       },
       err=>
       {
-
+          console.log(err);
+          item.Location = "Failed in picking the item.";
+          this.loading=false;
+      }
+    )
+  }
+  printLabelAndMark(){
+    this.loading=true;
+    this.orderService.printLabelAndMark(this.id,this.stateService.printer).subscribe(
+      data=>
+      {
+        this.loading=false;
+      },
+      err=>{
+         this.loading=false;
       }
     )
   }
