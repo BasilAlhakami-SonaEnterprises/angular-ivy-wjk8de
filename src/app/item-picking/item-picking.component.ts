@@ -65,7 +65,7 @@ export class ItemPickingComponent implements OnInit {
           this.batchId=data.BatchId;
           this.getPickLocation();
           //this.getPickLocationAndPick();
-          this.loading = false;
+         // this.loading = false;
         },
 
         err => {
@@ -98,20 +98,17 @@ export class ItemPickingComponent implements OnInit {
 
 
     getPickLocation(){
+      this.loading=true;
     this.lines.forEach(value=>{
   //  console.log(value.Item+" "+value.QTY+" "+value.BatchId);
       this.orderService.getItemPickLocation(value.Item,value.QTY,this.batchId).subscribe(
         dat=>{
-          console.log(dat);
           value.Location=dat.binNumber;
+          //pickItem();
         },
          err => {
-            console.log(err);
-          //console.log("!");
-         // value.Item="";
-          //value.Location = "Not Aloocated Please Allocate";
-          //value.QTY="";
-
+          value.Location = "Not Alocated Please Allocate";
+          this.loading=false;
         }
        
       );
@@ -132,5 +129,19 @@ export class ItemPickingComponent implements OnInit {
         }
       );
     });
+  }
+
+  pickItem(id:string,qty,batchId:string){
+    this.loading=true;
+    this.orderService.pickItem(id,qty,batchId).subscribe(
+      data=>
+      {
+          
+      },
+      err=>
+      {
+
+      }
+    )
   }
 }
