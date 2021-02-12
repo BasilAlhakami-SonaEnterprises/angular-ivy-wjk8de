@@ -24,7 +24,8 @@
 		<mat-list-item *ngFor="let link of data | itemFilter: filterArgs ">
 			<a matLine routerLink="/item-picking/{{selection}}/{{link.Item}}"
 				routerLinkActive="active">{{ link.Item }}</a>
-			<button mat-raised-button color="warn">{{link.Location}}</button>
+			<button *ngIf="(link.Item=='')" mat-raised-button color="warn">{{link.Location}}</button>
+      		<button *ngIf="(link.Item!='')" mat-raised-button color="primary">{{link.Location}}</button>
 			<button mat-icon-button>
         {{link.QTY}}
      </button>
