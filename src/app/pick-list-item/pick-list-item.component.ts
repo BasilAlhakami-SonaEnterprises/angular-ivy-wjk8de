@@ -128,8 +128,12 @@ export class PickListItemComponent implements OnInit {
       this.orderService.getItemPickLocation(value.Item,value.QTY,value.BatchId).subscribe(
         dat=>{
       //    console.log(dat);
-          value.Location=dat.binNumber;
-        },
+          value.Location=[];
+          dat.forEach(loc=>{
+             value.Location.push(loc.BinNumber);
+          });
+       
+           },
          err => {
           //console.log("!");
         
