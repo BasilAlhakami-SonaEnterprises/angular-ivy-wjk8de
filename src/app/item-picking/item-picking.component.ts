@@ -104,12 +104,16 @@ export class ItemPickingComponent implements OnInit {
     getPickLocation(){
       this.loading=true;
     this.lines.forEach(value=>{
-    console.log(value.Item+" "+value.QTY+" "+value.BatchId);
+
       this.orderService.getItemPickLocation(value.Item,value.QTY,this.batchId).subscribe(
         dat=>{
-          value.Location=dat.binNumber;
+          value.Location=[];
+          dat.forEach(locat=>{
+          value.Location.push(locat);
+          this.pickItem(value,locat.id,value.QTY,this.batchId);
+          });
 
-          this.pickItem(value,dat.docId,value.QTY,this.batchId);
+       
         },
          err => {
           value.Location = "Not Alocated Please Allocate";
