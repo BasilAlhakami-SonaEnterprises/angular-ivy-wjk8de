@@ -110,7 +110,7 @@ export class ItemPickingComponent implements OnInit {
           value.Location=[];
           dat.forEach(locat=>{
           value.Location.push(locat);
-          this.pickItem(value,locat.id,value.QTY,this.batchId);
+     //     this.pickItem(value,locat.id,value.QTY,this.batchId);
           });
 
        
