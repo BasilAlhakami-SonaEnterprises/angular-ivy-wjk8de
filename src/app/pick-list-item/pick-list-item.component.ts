@@ -67,7 +67,7 @@ export class PickListItemComponent implements OnInit {
     this.loading = true;
     this.orderService.getShipsTodayNextDayItemList().subscribe(data => {
       this.loading = false;
-      console.log(data);
+    //  console.log(data);
       this.data = data;
       this.getPickLocation();
     });
@@ -77,7 +77,7 @@ export class PickListItemComponent implements OnInit {
     this.loading = true;
     this.orderService.getShipsTodayOtherItemList().subscribe(data => {
       this.loading = false;
-      console.log(data);
+   console.log(data);
       this.data = data;
       this.getPickLocation();
     });
@@ -124,10 +124,10 @@ export class PickListItemComponent implements OnInit {
   
   getPickLocation(){
     this.data.forEach(value=>{
-  //  console.log(value.Item+" "+value.QTY+" "+value.BatchId);
+    //console.log(value.Item+" "+value.QTY+" "+value.BatchId);
       this.orderService.getItemPickLocation(value.Item,value.QTY,value.BatchId).subscribe(
         dat=>{
-      //    console.log(dat);
+        console.log(dat);
           value.Location=[];
           dat.forEach(loc=>{
              value.Location.push(loc.BinNumber);
@@ -136,7 +136,7 @@ export class PickListItemComponent implements OnInit {
            },
          err => {
           //console.log("!");
-        
+         console.log(err);
           value.Location = value.Item+"  Not Alocated Please Allocate";
             value.Item="";
 
