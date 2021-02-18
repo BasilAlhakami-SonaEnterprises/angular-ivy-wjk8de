@@ -105,12 +105,12 @@ export class ItemPickingComponent implements OnInit {
       this.loading=true;
     this.lines.forEach(value=>{
 
-      this.orderService.getItemPickLocation(value.Item,value.QTY,this.batchId).subscribe(
+      this.orderService.getItemPickLocation(value.Item,value.QTY,this.batchId,this.poNumber).subscribe(
         dat=>{
           value.Location=[];
           dat.forEach(locat=>{
           value.Location.push(locat);
-     //     this.pickItem(value,locat.id,value.QTY,this.batchId);
+        this.pickItem(value,locat.id,value.QTY,this.batchId);
           });
 
        
