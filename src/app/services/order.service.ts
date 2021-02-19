@@ -155,8 +155,8 @@ export class OrderService {
     });
   }
 
-  pickItem(id,qty,batchId){
-     return this.http.get(this.urls.PickItem+id+"/"+qty+"/"+batchId,{
+  pickItem(id,qty,batchId,poNumber){
+     return this.http.get(this.urls.PickItem+id+"/"+qty+"/"+batchId+"/"+poNumber,{
          observe:"response"
     });
   }

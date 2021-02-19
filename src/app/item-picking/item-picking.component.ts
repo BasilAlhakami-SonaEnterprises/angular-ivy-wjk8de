@@ -110,7 +110,7 @@ export class ItemPickingComponent implements OnInit {
           value.Location=[];
           dat.forEach(locat=>{
           value.Location.push(locat);
-        this.pickItem(value,locat.id,value.QTY,this.batchId);
+           this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
        
@@ -140,9 +140,9 @@ export class ItemPickingComponent implements OnInit {
     });
   }*/
 
-  pickItem(item,id:string,qty,batchId:string){
+  pickItem(item,id:string,qty,batchId:string,poNumber:string){
     this.loading=true;
-    this.orderService.pickItem(id,qty,batchId).subscribe(
+    this.orderService.pickItem(id,qty,batchId,poNumber).subscribe(
       data=>
       {
          this.pickSuccess=true;
