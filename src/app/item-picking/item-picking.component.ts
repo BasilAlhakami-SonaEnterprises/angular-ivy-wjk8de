@@ -110,6 +110,7 @@ export class ItemPickingComponent implements OnInit {
           value.Location=[];
           dat.forEach(locat=>{
           value.Location.push(locat);
+          console.log(locat)
          //  this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
@@ -117,6 +118,7 @@ export class ItemPickingComponent implements OnInit {
         },
          err => {
           value.Location = "Not Alocated Please Allocate";
+          console.log(err);
           this.loading=false;
         }
        
