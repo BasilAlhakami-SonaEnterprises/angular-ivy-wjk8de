@@ -28,6 +28,7 @@ export class OrderService {
       "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/",
     GetItemLocation : "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemLocation/",
     GetItemPickLocation:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemPickLocation/",
+    GetItemPickLocationPerPO:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemPickLocationPerPO/{itemCode}/{batchId}/{poNumber}",
     PickItem:"https://wms-services20210209153921.azurewebsites.net/api/PickItem/",
     PrintLabelAndMark:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/PrintLabelAndMark/"
   };
@@ -172,7 +173,9 @@ export class OrderService {
   getItemPickLocation(item,qty,batchId){
     return this.http.get(this.urls.GetItemPickLocation + item+"/"+qty+"/"+batchId);
   }
-
+  getItemPickLocationPerPO(item,batchId,poNumber){
+    return this.http.get(this.urls.GetItemPickLocationPerPO + item+"/"+batchId+"/"+poNumber);
+  }
   printLabelAndMark(id,printer){
     return this.http.get(this.urls.PrintLabelAndMark+id+"/"+printer);
   }
