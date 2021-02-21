@@ -110,7 +110,7 @@ export class PickListItemComponent implements OnInit {
         if (data.status == 200) {
         //  console.log(data);
           this.filterArgs = data.body.ItemCode;
-          console.log(this.filterArgs);
+        //  console.log(this.filterArgs);
           //this.router.navigate(["item-picking/"+this.selection+"/"+data.body.ItemCode]);
         }
         this.loading = false;
@@ -127,7 +127,7 @@ export class PickListItemComponent implements OnInit {
     //console.log(value.Item+" "+value.QTY+" "+value.BatchId);
       this.orderService.getItemPickLocation(value.Item,value.QTY,value.BatchId).subscribe(
         dat=>{
-        console.log(dat);
+       // console.log(dat);
           value.Location=[];
           dat.forEach(loc=>{
              value.Location.push(loc.BinNumber);
