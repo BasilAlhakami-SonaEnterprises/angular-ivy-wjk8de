@@ -28,7 +28,7 @@ export class OrderService {
       "https://directfulfillmentapi20200813154717.azurewebsites.net/api/MarkOrderShipped/",
     GetItemLocation : "https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemLocation/",
     GetItemPickLocation:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemPickLocation/",
-    GetItemPickLocationPerPO:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemPickLocationPerPO/{itemCode}/{batchId}/{poNumber}",
+    GetItemPickLocationPerPO:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/GetItemPickLocationPerPO/",
     PickItem:"https://wms-services20210209153921.azurewebsites.net/api/PickItem/",
     PrintLabelAndMark:"https://directfulfillmentapi20200813154717.azurewebsites.net/api/PrintLabelAndMark/"
   };
