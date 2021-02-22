@@ -123,7 +123,7 @@ export class ItemPickingComponent implements OnInit {
           })
           console.log(loc);
           value.Location.push(loc);
-         //  this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
+           this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
        
