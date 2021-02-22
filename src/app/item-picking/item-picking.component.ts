@@ -109,6 +109,7 @@ export class ItemPickingComponent implements OnInit {
         dat=>{
           value.Location=[];
           dat.forEach(locat=>{
+          console.log(locat);
           var loc=
           {
             BinNumber:locat.BinNumber,
@@ -120,10 +121,9 @@ export class ItemPickingComponent implements OnInit {
               loc.Quantity=alloc.Quantity;
               loc.PackSize=alloc.PackSize;
             }
-          })
-          console.log(loc);
+          });
           value.Location.push(loc);
-           this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
+          this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
        
@@ -165,6 +165,7 @@ export class ItemPickingComponent implements OnInit {
     this.orderService.pickItem(id,qty,batchId,poNumber).subscribe(
       data=>
       {
+          console.log(data);
          this.pickSuccess=true;
           this.printLabelAndMark();
       },
