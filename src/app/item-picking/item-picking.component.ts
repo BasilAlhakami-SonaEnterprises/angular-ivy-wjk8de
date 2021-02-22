@@ -109,15 +109,33 @@ export class ItemPickingComponent implements OnInit {
         dat=>{
           value.Location=[];
           dat.forEach(locat=>{
-          value.Location.push(locat);
-          console.log(locat)
+          var loc=
+          {
+            BinNumber:locat.BinNumber,
+            Quantity:"",
+            PackSize:"",
+          }
+          locat.AllocatationList.forEach(alloc=>{
+            if(alloc.BusinessPartnerPONumber==this.poNumber){
+              loc.Quantity=alloc.Quantity;
+              loc.PackSize=alloc.PackSize;
+            }
+          })
+          console.log(loc);
+          value.Location.push(loc);
          //  this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
        
         },
          err => {
-          value.Location = "Not Alocated Please Allocate";
+            var loc=
+          {
+            BinNumber:"Not Alocated Please Allocate",
+            Quantity:"",
+            PackSize:"",
+          }
+          value.Location.push(loc);
           console.log(err);
           this.loading=false;
         }
