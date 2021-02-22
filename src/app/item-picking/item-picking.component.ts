@@ -171,7 +171,13 @@ export class ItemPickingComponent implements OnInit {
       err=>
       {
           console.log(err);
-          item.Location = "Failed in picking the item.";
+                   var loc=
+          {
+            BinNumber:"Failed in picking the item.",
+            Quantity:"",
+            PackSize:"",
+          }
+          item.Location.push(loc);
           this.loading=false;
       }
     )
