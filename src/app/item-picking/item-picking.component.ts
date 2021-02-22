@@ -135,6 +135,7 @@ export class ItemPickingComponent implements OnInit {
             Quantity:"",
             PackSize:"",
           }
+           value.Location=[];
           value.Location.push(loc);
           console.log(err);
           this.loading=false;
@@ -165,7 +166,7 @@ export class ItemPickingComponent implements OnInit {
     this.orderService.pickItem(id,qty,batchId,poNumber).subscribe(
       data=>
       {
-          console.log(data);
+       
          this.pickSuccess=true;
           this.printLabelAndMark();
       },
