@@ -125,7 +125,7 @@ export class ItemPickingComponent implements OnInit {
             }
           });
           value.Location.push(loc);
-       /  this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
+         this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
        
