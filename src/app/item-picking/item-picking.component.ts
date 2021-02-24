@@ -59,7 +59,7 @@ export class ItemPickingComponent implements OnInit {
       .getItemLabel(this.selection,this.item,this.stateService.printer)
       .subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.lines = data.Lines;
           this.poNumber = data.PONumber;
           this.shipMethod = data.ShipMethod;
@@ -67,6 +67,7 @@ export class ItemPickingComponent implements OnInit {
           this.shippingDate = data.RequiredShipDate;
           this.batchId=data.BatchId;
           this.id=data.id;
+       //   console.log(data);
           this.getPickLocation();
           //this.getPickLocationAndPick();
          // this.loading = false;
@@ -105,11 +106,11 @@ export class ItemPickingComponent implements OnInit {
       this.loading=true;
     this.lines.forEach(value=>{
 
-      this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber).subscribe(
+      this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
         dat=>{
           value.Location=[];
           dat.forEach(locat=>{
-          console.log(locat);
+     
           var loc=
           {
             BinNumber:locat.BinNumber,
@@ -117,13 +118,14 @@ export class ItemPickingComponent implements OnInit {
             PackSize:"",
           }
           locat.AllocatationList.forEach(alloc=>{
-            if(alloc.BusinessPartnerPONumber==this.poNumber){
+ 
+            if(alloc.DocumentNumber==this.poNumber){
               loc.Quantity=alloc.Quantity;
               loc.PackSize=alloc.PackSize;
             }
           });
           value.Location.push(loc);
-          this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
+       /  this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
        

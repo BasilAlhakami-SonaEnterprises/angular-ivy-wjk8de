@@ -125,7 +125,8 @@ export class PickListItemComponent implements OnInit {
   getPickLocation(){
     this.data.forEach(value=>{
     //console.log(value.Item+" "+value.QTY+" "+value.BatchId);
-      this.orderService.getItemPickLocation(value.Item,value.QTY,value.BatchId).subscribe(
+     // console.log(value);
+      this.orderService.getItemPickLocation(value.Item,value.QTY,value.BatchId,value.ExternalItemID).subscribe(
         dat=>{
        // console.log(dat);
           value.Location=[];
@@ -136,7 +137,7 @@ export class PickListItemComponent implements OnInit {
            },
          err => {
           //console.log("!");
-
+         // console.log(err);
           value.Location = value.Item+"  Not Alocated Please Allocate";
             value.Item="";
 

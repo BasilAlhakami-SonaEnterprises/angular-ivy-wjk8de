@@ -170,11 +170,11 @@ export class OrderService {
     return this.http.get(this.urls.GetItemLocation + item + "/" + qty);
   }
 
-  getItemPickLocation(item,qty,batchId){
-    return this.http.get(this.urls.GetItemPickLocation + item+"/"+qty+"/"+batchId);
+  getItemPickLocation(item,qty,batchId,asin){
+    return this.http.get(this.urls.GetItemPickLocation + item+"/"+qty+"/"+batchId+"/"+asin);
   }
-  getItemPickLocationPerPO(item,batchId,poNumber){
-    return this.http.get(this.urls.GetItemPickLocationPerPO + item+"/"+batchId+"/"+poNumber);
+  getItemPickLocationPerPO(item,batchId,poNumber,asin){
+    return this.http.get(this.urls.GetItemPickLocationPerPO + item+"/"+batchId+"/"+poNumber+"/"+asin);
   }
   printLabelAndMark(id,printer){
     return this.http.get(this.urls.PrintLabelAndMark+id+"/"+printer);
