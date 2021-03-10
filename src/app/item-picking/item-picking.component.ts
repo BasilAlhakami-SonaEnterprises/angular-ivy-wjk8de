@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { OrderService } from "../services/order.service";
 import { StateService } from "../services/state.service";
+import { ItemInfoService } from "../services/item-info.service";
 import { Location } from "@angular/common";
 
 @Component({
@@ -18,6 +19,7 @@ export class ItemPickingComponent implements OnInit {
   shipMethod = "";
   trackingNumber = "";
   shippingDate = "";
+  scannedValue = [];
   pickSuccess=false
   id="";
   batchId="";
@@ -29,6 +31,7 @@ export class ItemPickingComponent implements OnInit {
     private route: ActivatedRoute,
     private orderService: OrderService,
     private stateService: StateService,
+    private itemService:ItemInfoService,
     private location: Location
   ) {}
 
@@ -50,7 +53,42 @@ export class ItemPickingComponent implements OnInit {
      this.getItemLabel();
       
   }
-
+  @HostListener("window:keypress", ["$event"]) keyEvent(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      this.error = null;
+      var scanned = this.scannedValue.join("");
+ 
+      if (scanned != null && scanned != "") this.getScannedItem(scanned);
+      this.scannedValue = [];
+    } else {
+  
+      this.scannedValue.push(event.key);
+    }
+  }
+    getScannedItem(scanned) {
+    this.loading = true;
+    this.itemService.getItemInfo(scanned).subscribe(
+      data => {
+        if (data.status == 200) {
+        //  console.log(data);
+        console.log(data.body);
+        if(this.item== data.body.ItemCode){
+            this.getPickLocationAndPick();
+        }else{
+          this.error="please scan the correct item"
+        }
+        //  console.log(this.filterArgs);
+          //this.router.navigate(["item-picking/"+this.selection+"/"+data.body.ItemCode]);
+        }
+        this.loading = false;
+      },
+      err => {
+       
+        this.error = err.error.error;
+        this.loading = false;
+      }
+    );
+  }
   getItemLabel(){
     this.loading = true;
     // for testing remove the printer number to avoid printing 
@@ -101,8 +139,51 @@ export class ItemPickingComponent implements OnInit {
     this.location.back();
   }
 
-
     getPickLocation(){
+         this.loading=true;
+    this.lines.forEach(value=>{
+
+      this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
+        dat=>{
+          value.Location=[];
+          dat.forEach(locat=>{
+     
+          var loc=
+          {
+            BinNumber:locat.BinNumber,
+            Quantity:"",
+            PackSize:"",
+          }
+          locat.AllocatationList.forEach(alloc=>{
+ 
+            if(alloc.DocumentNumber==this.poNumber){
+              loc.Quantity=alloc.Quantity;
+              loc.PackSize=alloc.PackSize;
+            }
+          });
+          value.Location.push(loc);
+      //   this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
+          });
+         this.error="please scan the item to print"
+         this.loading=false;
+        },
+         err => {
+            var loc=
+          {
+            BinNumber:"Not Alocated Please Allocate",
+            Quantity:"",
+            PackSize:"",
+          }
+           value.Location=[];
+          value.Location.push(loc);
+          console.log(err);
+          this.loading=false;
+        }
+       
+      );
+    });
+    }
+    getPickLocationAndPick(){
       this.loading=true;
     this.lines.forEach(value=>{
 
@@ -125,7 +206,8 @@ export class ItemPickingComponent implements OnInit {
             }
           });
           value.Location.push(loc);
-         this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
+       
+        this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
 
        

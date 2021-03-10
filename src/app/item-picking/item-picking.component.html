@@ -28,6 +28,11 @@
 	<div fxLayout='row'>
 		<div fxFlex="auto" style="padding-left:6%;">Shipping Date: {{shippingDate}}</div>
 	</div>
+    <br/>
+      <br/>
+<div fxLayout='row'>
+		<div fxFlex="auto" style="padding-left:6%;"><b>{{error}}</b></div>
+	</div>
 
 	<div fxLayout='row' style="margin-top: 20px;" *ngIf="loading; else buttonElse">
 		<div fxFlex="auto" style="padding-left:6%;">
