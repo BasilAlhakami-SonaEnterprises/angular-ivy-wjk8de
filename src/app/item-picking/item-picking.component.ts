@@ -19,6 +19,7 @@ export class ItemPickingComponent implements OnInit {
   shipMethod = "";
   trackingNumber = "";
   shippingDate = "";
+  isWaitingForItemVerification=false;
   scannedValue = [];
   pickSuccess=false
   id="";
@@ -75,7 +76,7 @@ export class ItemPickingComponent implements OnInit {
         if(this.item== data.body.ItemCode){
             this.getPickLocationAndPick();
         }else{
-          this.error="please scan the correct item"
+          this.error="please scan or type the correct item"
         }
         //  console.log(this.filterArgs);
           //this.router.navigate(["item-picking/"+this.selection+"/"+data.body.ItemCode]);
@@ -164,7 +165,8 @@ export class ItemPickingComponent implements OnInit {
           value.Location.push(loc);
       //   this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
           });
-         this.error="please scan the item to print"
+         this.error="please scan or type the item to print"
+         this.isWaitingForItemVerification=true;
          this.loading=false;
         },
          err => {
@@ -185,6 +187,7 @@ export class ItemPickingComponent implements OnInit {
     }
     getPickLocationAndPick(){
       this.loading=true;
+      this.isWaitingForItemVerification=false;
     this.lines.forEach(value=>{
 
       this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
