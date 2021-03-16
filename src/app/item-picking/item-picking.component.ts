@@ -75,7 +75,7 @@ export class ItemPickingComponent implements OnInit {
         if (data.status == 200) {
         //  console.log(data);
         console.log(data.body);
-        if(this.item== data.body.ItemCode){
+        if(this.item== data.body.ItemCode||this.asin==data.body.ASIN){
             this.getPickLocationAndPick();
         }else{
           this.error="please scan or type the correct item"
@@ -102,6 +102,7 @@ export class ItemPickingComponent implements OnInit {
         data => {
           //console.log(data);
           this.lines = data.Lines;
+          this.asin=this.lines[0].ExternalItemID
           this.poNumber = data.PONumber;
           this.shipMethod = data.ShipMethod;
           this.trackingNumber = data.TrackingNO;
