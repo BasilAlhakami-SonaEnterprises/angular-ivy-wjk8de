@@ -70,6 +70,7 @@ export class ItemPickingComponent implements OnInit {
     this.loading = true;
     this.itemService.getItemInfo(scanned).subscribe(
       data => {
+        this.itemCode=null;
         if (data.status == 200) {
         //  console.log(data);
         console.log(data.body);
@@ -84,7 +85,7 @@ export class ItemPickingComponent implements OnInit {
         this.loading = false;
       },
       err => {
-       
+       this.itemCode=null;
         this.error = err.error.error;
         this.loading = false;
       }
