@@ -68,6 +68,7 @@ export class ItemPickingComponent implements OnInit {
   }
     getScannedItem(scanned) {
     this.loading = true;
+    this.scannedValue=[];
     this.itemService.getItemInfo(scanned).subscribe(
       data => {
         this.itemCode=null;
