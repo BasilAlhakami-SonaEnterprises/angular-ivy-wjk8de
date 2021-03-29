@@ -166,7 +166,7 @@ export class ItemPickingComponent implements OnInit {
             }
           });
           value.Location.push(loc);
-      //   this.pickItem(value,locat.id,value.QTY,this.batchId,this.poNumber);
+   
           });
          this.error="please scan or type the item to print"
          this.isWaitingForItemVerification=true;
@@ -195,9 +195,8 @@ export class ItemPickingComponent implements OnInit {
 
       this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
         dat=>{
-          value.Location=[];
+         
           dat.forEach(locat=>{
-     
           var loc=
           {
             BinNumber:locat.BinNumber,
@@ -211,8 +210,6 @@ export class ItemPickingComponent implements OnInit {
               loc.PackSize=alloc.PackSize;
             }
           });
-          value.Location.push(loc);
-       
         this.pickItem(value,locat.id,loc.Quantity,this.batchId,this.poNumber);
           });
 
