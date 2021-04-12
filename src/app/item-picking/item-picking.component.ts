@@ -150,8 +150,11 @@ export class ItemPickingComponent implements OnInit {
       this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
         dat=>{
           value.Location=[];
+         
+          console.log(dat[0].ItemCode);
           dat.forEach(locat=>{
-     
+          this.item=locat.ItemCode;
+          this.lines[0].Item=locat.ItemCode;
           var loc=
           {
             BinNumber:locat.BinNumber,
