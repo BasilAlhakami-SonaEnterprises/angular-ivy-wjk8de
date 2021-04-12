@@ -198,7 +198,6 @@ export class ItemPickingComponent implements OnInit {
 
       this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
         dat=>{
-         
           dat.forEach(locat=>{
           var loc=
           {
@@ -215,8 +214,6 @@ export class ItemPickingComponent implements OnInit {
           });
         this.pickItem(value,locat.id,loc.Quantity,this.batchId,this.poNumber);
           });
-
-       
         },
          err => {
             var loc=
