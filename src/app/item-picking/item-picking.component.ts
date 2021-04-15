@@ -212,7 +212,8 @@ export class ItemPickingComponent implements OnInit {
               loc.PackSize=alloc.PackSize;
             }
           });
-        this.pickItem(value,locat.id,loc.Quantity,this.batchId,this.poNumber);
+        var quantityToPick=+loc.Quantity*+loc.PackSize;
+        this.pickItem(value,locat.id,quantityToPick,this.batchId,this.poNumber);
           });
         },
          err => {
