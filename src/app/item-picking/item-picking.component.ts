@@ -196,11 +196,12 @@ export class ItemPickingComponent implements OnInit {
     getPickLocationAndPick(){
       this.loading=true;
       this.isWaitingForItemVerification=false;
+           var i=0;
     this.lines.forEach(value=>{
-
+          i++;
       this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
         dat=>{
-          var i=0;
+     
           dat.forEach(locat=>{
           var loc=
           {
@@ -216,7 +217,7 @@ export class ItemPickingComponent implements OnInit {
             }
           });
         var quantityToPick=+loc.Quantity*+loc.PackSize;
-        i++;
+     
         this.pickItem(value,locat.id,quantityToPick,this.batchId,this.poNumber,i);
           });
         },
