@@ -27,7 +27,7 @@ export class ItemPickingComponent implements OnInit {
   printer = "";
   error = "";
   loading : boolean = false;
-
+  isAllocated:boolean=true;
   constructor(
     private route: ActivatedRoute,
     private orderService: OrderService,
@@ -75,10 +75,14 @@ export class ItemPickingComponent implements OnInit {
         if (data.status == 200) {
         //  console.log(data);
         console.log(data.body);
-        if(this.item== data.body.ItemCode||this.asin==data.body.ASIN){
+        if((this.item== data.body.ItemCode||this.asin==data.body.ASIN)&&this.isAllocated){
             this.getPickLocationAndPick();
-        }else{
-          this.error="please scan or type the correct item"
+        }
+        else if(!this.isAllocated){
+          this.error="please make sure all are allocated";
+        }
+        else{
+          this.error="please scan or type the correct item";
         }
         //  console.log(this.filterArgs);
           //this.router.navigate(["item-picking/"+this.selection+"/"+data.body.ItemCode]);
@@ -146,6 +150,7 @@ export class ItemPickingComponent implements OnInit {
     getPickLocation(){
          this.loading=true;
          var i=-1;
+         this.isAllocated=true;
     this.lines.forEach(value=>{
         i++;
       this.orderService.getItemPickLocationPerPO(value.Item,this.batchId,this.poNumber,value.ExternalItemID).subscribe(
@@ -188,6 +193,8 @@ export class ItemPickingComponent implements OnInit {
           value.Location.push(loc);
           console.log(err);
           this.loading=false;
+          this.isAllocated=false;
+          this.error="please make sure all are allocated";
         }
        
       );
