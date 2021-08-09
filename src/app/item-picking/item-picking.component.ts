@@ -242,6 +242,9 @@ export class ItemPickingComponent implements OnInit {
             Quantity:"",
             PackSize:"",
           }
+          if(err.error.code===1){
+            loc.BinNumber="Already Picked";
+          }
            value.Location=[];
           value.Location.push(loc);
           console.log(err);
