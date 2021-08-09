@@ -190,11 +190,17 @@ export class ItemPickingComponent implements OnInit {
             PackSize:"",
           }
            value.Location=[];
+      
+          if(err.error.code===1){
+            loc.BinNumber="Already Picked";
+          }else{
+            this.isAllocated=false;
+            this.error="please make sure all are allocated";
+          }
           value.Location.push(loc);
-          console.log(err);
+         // console.log(err);
           this.loading=false;
-          this.isAllocated=false;
-          this.error="please make sure all are allocated";
+        
         }
        
       );
